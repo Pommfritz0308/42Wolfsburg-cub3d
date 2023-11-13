@@ -7,5 +7,9 @@ int	open_map(char *file)
 
 	path = ft_strjoin("/Users/fbohling/Desktop/cub3d/maps/", file);
 	fd = open(path, O_RDONLY);
-	
+	if (fd < 0)
+	{
+		perror("Cub3D: ");
+		exit (0);
+	}
 }
