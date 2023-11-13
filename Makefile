@@ -19,7 +19,7 @@ NAME = cub3D
 all: $(LIBFT) $(MINILIBX) $(NAME)
 
 $(LIBFT):
-	@ $(MAKE) -C $(LIBFT_DIR) >/dev/null 2>&1
+	@ $(MAKE) -C $(LIBFT_DIR)
 
 $(MINILIBX):
 	@ $(MAKE) -C $(MINILIBX_DIR) >/dev/null 2>&1

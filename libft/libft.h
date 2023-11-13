@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbohling <fbohling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbohling <fbohling@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:05:54 by fbohling          #+#    #+#             */
-/*   Updated: 2023/06/06 16:59:50 by fbohling         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:35:33 by fbohling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "gnl/get_next_line.h"
 
 typedef struct s_list
 {
