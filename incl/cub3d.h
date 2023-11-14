@@ -20,7 +20,7 @@ typedef struct s_params {
 typedef struct s_config {
 	unsigned int	f_color;
 	unsigned int	c_color;
-	char			*textures[4];
+	char			**textures;
 }	t_config;
 
 unsigned int		rgb_to_hex(int r, int g, int b);

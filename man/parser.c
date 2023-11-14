@@ -32,3 +32,14 @@ void	read_configuration(t_params *data)
 	free(line);
 }
 
+void	isolate_params(t_params *p)
+{
+	int	i;
+
+	i = 0;
+	p->config.textures = ft_calloc(5, sizeof(char *));
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == 'N' && line[i + 1] == 'O')
+		
+}
