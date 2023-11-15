@@ -8,6 +8,8 @@
 # include <unistd.h>
 # include <stdbool.h>
 
+# define INVALID_CONFIG "invalid configuration"
+
 struct	s_config;
 
 typedef struct s_params {
@@ -30,5 +32,6 @@ int					ft_strstr(char *str, char *search);
 bool				create_window(t_params *data);
 void				open_map(t_params *data, char *file);
 void				read_configuration(t_params *data);
-
+void				error_msg(char *error, char *str);
+void				print_tab(char **arr);
 #endif
