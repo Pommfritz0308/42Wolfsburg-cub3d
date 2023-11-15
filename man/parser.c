@@ -34,14 +34,11 @@ void	read_configuration(t_params *data)
 		pos = 0;
 		if (line[0] && line[0] != '\n')
 		{
-			pos = ft_strstr(line, (char *)identifier[i]);
-			if (pos >= 0)
+			pos = identifier_value_pos(line, (char *)identifier[i]);
+			if (pos > -1)
 			{
-				pos += ft_strlen(identifier[i]);
-				config.textures[i] = ft_substr(line
-						+ pos, 0, ft_strlen(line) - pos);
-				close(data->map_fd);
-				data->map_fd = open("/Users/fbohling/Desktop/cub3d/maps/test.cub", O_RDONLY);
+				data->config->textures[i] = ft_substr(line
+						+ pos, 0, ft_strlen(line) - pos - 1);
 				i++;
 			}
 		}
@@ -49,13 +46,12 @@ void	read_configuration(t_params *data)
 		line = get_next_line(data->map_fd);
 	}
 	free(line);
-	print_tab(config.textures);
+	print_tab(data->config->textures);
 }
 
-int	ft_strstr(char *str, char *search)
+int	identifier_value_pos(char *str, char *search)
 {
 	int	i;
-	int	start;
 	int	j;
 
 	i = 0;
@@ -69,14 +65,17 @@ int	ft_strstr(char *str, char *search)
 			continue ;
 		}
 		j = 0;
-		start = i;
 		while (str[i] == search[j] && str[i] && search[j])
 		{
 			i++;
 			j++;
 		}
 		if (search[j] == '\0')
-			return (start);
+		{
+			while (str[i] == ' ')
+				i++;
+			return (i);
+		}
 		else
 			break ;
 	}

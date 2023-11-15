@@ -11,6 +11,6 @@ int	main(int argc, char **argv)
 	}
 	open_map(&data, argv[1]);
 	read_configuration(&data);
-	create_window(&data);
+	// create_window(&data);
 	// init_map_data();
 }

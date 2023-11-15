@@ -23,7 +23,10 @@ void	print_tab(char **arr)
 {
 	int	i;
 
-	i = -1;
-	while (arr[++i])
+	i = 0;
+	while (arr[i])
+	{
 		printf("Arr[%i]: |%s|\n", i, arr[i]);
+		i++;
+	}
 }
