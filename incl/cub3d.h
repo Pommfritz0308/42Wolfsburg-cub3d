@@ -26,6 +26,7 @@ typedef struct s_config {
 unsigned int		rgb_to_hex(int r, int g, int b);
 int					handle_key_press(int keycode, t_params *data);
 int					close_window(t_params *data);
+int					ft_strstr(char *str, char *search);
 bool				create_window(t_params *data);
 void				open_map(t_params *data, char *file);
 void				read_configuration(t_params *data);

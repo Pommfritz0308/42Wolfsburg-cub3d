@@ -19,27 +19,51 @@ void	open_map(t_params *data, char *file)
 
 void	read_configuration(t_params *data)
 {
-	char	*line;
+	char		*line;
+	t_config	config;
 
+	data->config = &config;
+	data->config->textures = ft_calloc(5, sizeof(char *));
 	line = get_next_line(data->map_fd);
 	while (line)
 	{
 		if (line[0] && line[0] != '\n')
-			isolate_params(line);
+		{
+			printf("%i\n", ft_strstr(line, "NO"));
+		}
 		free(line);
 		line = get_next_line(data->map_fd);
 	}
 	free(line);
 }
 
-void	isolate_params(t_params *p)
+int	ft_strstr(char *str, char *search)
 {
 	int	i;
+	int	start;
+	int	j;
 
 	i = 0;
-	p->config.textures = ft_calloc(5, sizeof(char *));
-	while (line[i] == ' ')
-		i++;
-	if (line[i] == 'N' && line[i + 1] == 'O')
-		
+	if (!search || !search[0] || !str)
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == ' ')
+		{
+			i++;
+			continue ;
+		}
+		j = 0;
+		start = i;
+		while (str[i] == search[j] && str[i] && search[j])
+		{
+			i++;
+			j++;
+		}
+		if (search[j] == '\0')
+			return (start);
+		else
+			break ;
+	}
+	return (-1);
 }
