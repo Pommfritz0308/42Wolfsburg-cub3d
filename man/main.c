@@ -11,6 +11,13 @@ int	main(int argc, char **argv)
 	}
 	open_map(&data, argv[1]);
 	read_configuration(&data);
+	if (check_found(&data))
+		return (free(data.config), 1);
+	print_tab(data.config->xpm);
+	ft_free_array(data.config->xpm);
+	free(data.config);
+	// ft_free_array(data.config->xpm);
+	// ft_free_array(data.config->textures);
 	// create_window(&data);
 	// init_map_data();
 }

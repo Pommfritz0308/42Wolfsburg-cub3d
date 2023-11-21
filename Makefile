@@ -1,4 +1,4 @@
-SRCS = man/main.c man/inits.c man/window_graphics.c man/events.c man/parser.c man/utils.c
+SRCS = man/main.c man/inits.c man/window_graphics.c man/events.c man/parser.c man/utils.c man/parser2.c
 OBJS = $(SRCS:.c=.o)
 
 BONUS =
@@ -6,7 +6,7 @@ BONUS_OBJS = $(BONUS:.c=.o)
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -g -I libft/
+CFLAGS = -Wall -Werror -Wextra -g -I libft/ #-fsanitize=address
 LIBFT_DIR		= libft
 MINILIBX_DIR	= minilibx
 LIBFT			= $(LIBFT_DIR)/libft.a

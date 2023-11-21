@@ -19,34 +19,39 @@ void	open_map(t_params *data, char *file)
 
 void	read_configuration(t_params *data)
 {
-	char		*line;
-	t_config	config;
-	const char	*identifier[] = {"NO", "SO", "EA", "WE", "F", "C"};
+	const char	*identifier[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
 	int			i;
-	int			pos;
+	char		*l;
 
-	i = 0;
-	data->config = &config;
-	data->config->textures = ft_calloc(5, sizeof(char *));
-	line = get_next_line(data->map_fd);
-	while (line)
+	data->config = malloc(sizeof(t_config));
+	data->config->found = ft_calloc(6, sizeof(int));
+	data->config->xpm = ft_calloc(7, sizeof(char *));
+	l = get_next_line(data->map_fd);
+	while (l)
 	{
-		pos = 0;
-		if (line[0] && line[0] != '\n')
+		i = 0;
+		while (identifier[i])
 		{
-			pos = identifier_value_pos(line, (char *)identifier[i]);
-			if (pos > -1)
-			{
-				data->config->textures[i] = ft_substr(line
-						+ pos, 0, ft_strlen(line) - pos - 1);
-				i++;
-			}
+			identifier_value(data, (char *)identifier[i], l, i);
+			i++;
 		}
-		free(line);
-		line = get_next_line(data->map_fd);
+		free(l);
+		l = get_next_line(data->map_fd);
 	}
-	free(line);
-	print_tab(data->config->textures);
+}
+
+void	identifier_value(t_params *data, char *identifier, char *l, int i)
+{
+	if (l[0] && l[0] != '\n')
+	{
+		data->config->p = identifier_value_pos(l, (char *)identifier);
+		if (data->config->p > -1 && data->config->found[i] == 0)
+		{
+			data->config->xpm[i] = ft_substr(l + data->config->p,
+					0, ft_strlen(l) - data->config->p - 1);
+			data->config->found[i] = 1;
+		}
+	}
 }
 
 int	identifier_value_pos(char *str, char *search)
@@ -80,4 +85,31 @@ int	identifier_value_pos(char *str, char *search)
 			break ;
 	}
 	return (-1);
+}
+
+int	check_found(t_params *data)
+{
+	int	i;
+	int	ret;
+
+	ret = 0;
+	i = 5;
+	while (i > 0)
+	{
+		if (data->config->found[i] == 0)
+			ret = 1;
+		i--;
+	}
+	if (ret == 1)
+	{
+		while (i < 6)
+		{
+			if (data->config->found[i] == 1)
+				free(data->config->xpm[i]);
+			i++;
+		}
+		free(data->config->xpm);
+	}
+	free(data->config->found);
+	return (ret);
 }

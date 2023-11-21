@@ -30,3 +30,16 @@ void	print_tab(char **arr)
 		i++;
 	}
 }
+
+void	ft_free_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
