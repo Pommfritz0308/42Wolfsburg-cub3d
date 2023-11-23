@@ -9,6 +9,9 @@
 # include <stdbool.h>
 
 # define INVALID_CONFIG "invalid configuration"
+# define NO_FILE_DIR "No such file or directory"
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 struct	s_config;
 
@@ -16,7 +19,6 @@ typedef struct s_params {
 	void			*win;
 	void			*mlx;
 	int				map_fd;
-	int				*texture_fds;
 	struct s_config	*config;
 }	t_params;
 
@@ -36,6 +38,7 @@ int					handle_key_press(int keycode, t_params *data);
 int					close_window(t_params *data);
 int					identifier_value_pos(char *str, char *search);
 int					check_found(t_params *data);
+int					open_textures(t_params *data);
 bool				create_window(t_params *data);
 void				read_configuration(t_params *data);
 void				open_map(t_params *data, char *file);

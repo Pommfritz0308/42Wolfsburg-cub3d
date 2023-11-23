@@ -14,10 +14,9 @@ int	main(int argc, char **argv)
 	if (check_found(&data))
 		return (free(data.config), 1);
 	print_tab(data.config->xpm);
+	// open_textures(&data);
+	// create_window(&data);
 	ft_free_array(data.config->xpm);
 	free(data.config);
-	// ft_free_array(data.config->xpm);
-	// ft_free_array(data.config->textures);
-	// create_window(&data);
 	// init_map_data();
 }
