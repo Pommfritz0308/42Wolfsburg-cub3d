@@ -45,4 +45,6 @@ void				open_map(t_params *data, char *file);
 void				error_msg(char *error, char *str);
 void				print_tab(char **arr);
 void				ft_free_array(char **arr);
+int					handle_rgb(char *str);
+int					handle_rgb_helper(char *str);
 #endif

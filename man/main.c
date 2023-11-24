@@ -15,7 +15,11 @@ int	main(int argc, char **argv)
 		return (free(data.config), 1);
 	print_tab(data.config->xpm);
 	// open_textures(&data);
-	// create_window(&data);
+	data.config->f_color = handle_rgb(data.config->xpm[4]);
+	data.config->f_color = handle_rgb(data.config->xpm[5]);
+	if (!data.config->f_color || !data.config->c_color)
+		return (1);
+	create_window(&data);
 	ft_free_array(data.config->xpm);
 	free(data.config);
 	// init_map_data();
