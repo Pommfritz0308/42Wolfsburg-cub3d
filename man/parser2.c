@@ -1,27 +1,36 @@
 #include "../incl/cub3d.h"
 
-int	handle_rgb(char *str)
+int	handle_rgb(char *str, int *error)
 {
 	int		i;
-	int		hex_color;
 	char	**arr;
+	char	*temp;
+	int		hex_code;
 
 	i = 0;
 	if (!str[0] || handle_rgb_helper(str))
-		return (-1);
+	{
+		*error = 1;
+		return (0);
+	}
 	arr = ft_split(str, ',');
 	while (arr[i])
 		i++;
 	if (i != 3)
-		return (-1);
+	{
+		*error = 1;
+		return (0);
+	}
 	i = -1;
 	while (arr[++i])
 	{
+		temp = ft_strtrim(arr[i], " ");
 		free(arr[i]);
-		arr[i] = ft_strtrim(arr[i], " ");
+		arr[i] = temp;
 	}
-	hex_color = rgb_to_hex(ft_atoi(arr[0]), ft_atoi(arr[1]), ft_atoi(arr[2]));
-	return (hex_color);
+	hex_code = rgb_to_hex(ft_atoi(arr[0]), ft_atoi(arr[1]), ft_atoi(arr[2]));
+	ft_free_array(arr);
+	return (hex_code);
 }
 
 int	handle_rgb_helper(char *str)

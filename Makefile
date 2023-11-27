@@ -6,7 +6,7 @@ BONUS_OBJS = $(BONUS:.c=.o)
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -g -I libft/ #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -I libft/ -fsanitize=address
 LIBFT_DIR		= libft
 MINILIBX_DIR	= minilibx
 LIBFT			= $(LIBFT_DIR)/libft.a

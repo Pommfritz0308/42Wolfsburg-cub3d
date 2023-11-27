@@ -8,8 +8,9 @@
 # include <unistd.h>
 # include <stdbool.h>
 
+# define NOT_SPECIFIED "not specified"
 # define INVALID_CONFIG "invalid configuration"
-# define NO_FILE_DIR "No such file or directory"
+# define NO_FILE_DIR "no such file or directory"
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 
@@ -45,6 +46,7 @@ void				open_map(t_params *data, char *file);
 void				error_msg(char *error, char *str);
 void				print_tab(char **arr);
 void				ft_free_array(char **arr);
-int					handle_rgb(char *str);
+int					handle_rgb(char *str, int *error);
 int					handle_rgb_helper(char *str);
+int					parse_cub(t_params *data, char **argv);
 #endif

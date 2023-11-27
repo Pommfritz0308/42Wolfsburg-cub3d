@@ -89,27 +89,28 @@ int	identifier_value_pos(char *str, char *search)
 
 int	check_found(t_params *data)
 {
-	int	i;
-	int	ret;
+	int			i;
+	int			ret;
+	const char	*identifier[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
 
 	ret = 0;
-	i = 5;
-	while (i > 0)
+	i = 6;
+	while (--i >= 0)
 	{
 		if (data->config->found[i] == 0)
 			ret = 1;
-		i--;
 	}
 	if (ret == 1)
 	{
-		while (i < 6)
+		printf("Error\n");
+		while (++i < 6)
 		{
 			if (data->config->found[i] == 1)
 				free(data->config->xpm[i]);
-			i++;
+			else
+				printf("Cub3D: \"%s\": not specified\n", identifier[i]);
 		}
 		free(data->config->xpm);
 	}
-	free(data->config->found);
-	return (ret);
+	return (free(data->config->found), ret);
 }
