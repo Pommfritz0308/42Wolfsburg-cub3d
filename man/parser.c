@@ -5,13 +5,19 @@ void	open_map(t_params *data, char *file)
 	int		fd;
 	char	*path;
 
+	if (ft_check_file_format(".cub", file))
+	{
+		error_msg("wrong file format", file);
+		exit(1);
+	}
 	path = ft_strjoin("/Users/fbohling/Desktop/cub3d/maps/", file);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
+		ft_putendl_fd("Error", 2);
 		perror("Cub3D");
 		free(path);
-		exit (0);
+		exit (1);
 	}
 	free(path);
 	data->map_fd = fd;
