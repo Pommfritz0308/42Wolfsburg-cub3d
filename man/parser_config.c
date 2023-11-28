@@ -7,7 +7,7 @@ void	open_map(t_params *data, char *file)
 
 	if (ft_check_file_format(".cub", file))
 	{
-		error_msg("wrong file format", file);
+		error_msg("wrong file format (expected: *.cub)", file);
 		exit(1);
 	}
 	path = ft_strjoin("/Users/fbohling/Desktop/cub3d/maps/", file);
@@ -32,17 +32,19 @@ void	read_configuration(t_params *data)
 	data->config = malloc(sizeof(t_config));
 	data->config->found = ft_calloc(6, sizeof(int));
 	data->config->xpm = ft_calloc(7, sizeof(char *));
-	l = get_next_line(data->map_fd);
-	while (l)
+	l = gnl_w_counter(data, data->map_fd);
+	data->count = 0;
+	while (l && data->count < 6)
 	{
 		i = 0;
-		while (identifier[i])
+		while (identifier[i] && data->count < 6)
 		{
 			identifier_value(data, (char *)identifier[i], l, i);
 			i++;
 		}
 		free(l);
-		l = get_next_line(data->map_fd);
+		if (data->count < 6)
+			l = gnl_w_counter(data, data->map_fd);
 	}
 }
 
@@ -56,6 +58,7 @@ void	identifier_value(t_params *data, char *identifier, char *l, int i)
 			data->config->xpm[i] = ft_substr(l + data->config->p,
 					0, ft_strlen(l) - data->config->p - 1);
 			data->config->found[i] = 1;
+			data->count++;
 		}
 	}
 }

@@ -20,6 +20,8 @@ typedef struct s_params {
 	void			*win;
 	void			*mlx;
 	int				map_fd;
+	int				line_n;
+	int				count;
 	struct s_config	*config;
 }	t_params;
 
@@ -47,6 +49,8 @@ void				error_msg(char *error, char *str);
 void				print_tab(char **arr);
 void				ft_free_array(char **arr);
 int					handle_rgb(char *str, int *error);
-int					handle_rgb_helper(char *str);
+int					handle_rgb_helper(char **arr);
+int					check_rgb_code(char *str);
 int					parse_cub(t_params *data, char **argv);
+char				*gnl_w_counter(t_params *data, int fd);
 #endif

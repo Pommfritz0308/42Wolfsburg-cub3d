@@ -1,4 +1,5 @@
-SRCS = man/main.c man/inits.c man/window_graphics.c man/events.c man/parser.c man/utils.c man/parser2.c
+SRCS	=	man/main.c man/inits.c man/window_graphics.c man/events.c man/parser_config.c man/utils.c man/parser_config2.c \
+			man/parser_map.c
 OBJS = $(SRCS:.c=.o)
 
 BONUS =

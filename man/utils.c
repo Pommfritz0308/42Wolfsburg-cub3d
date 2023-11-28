@@ -54,3 +54,13 @@ void	ft_free_array(char **arr)
 	}
 	free(arr);
 }
+
+char	*gnl_w_counter(t_params *data, int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (line)
+		data->line_n++;
+	return (line);
+}
