@@ -14,7 +14,6 @@ bool	create_window(t_params *data)
 
 int	close_window(t_params *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
+	clean_exit(data, EXIT_SUCCESS);
 	return (0);
 }

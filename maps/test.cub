@@ -1,14 +1,6 @@
-asfda
-       SO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-
-
-
-C 255, 247, 1
-
-SOadgadsf
-       NO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-sdfg
+NO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
+SO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
 EA /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-F 135, 0, 221
 WE /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-hey
+C 150, 247, 1g
+F 135, 0, 221f

@@ -21,7 +21,9 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 
 SRC_PATH	= src/
-SRC	=	main.c \
+SRC	=	check_colors.c \
+		clean_exit.c \
+		main.c \
  		inits.c \
  		window_graphics.c \
  		events.c \
@@ -42,6 +44,9 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
+
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH)

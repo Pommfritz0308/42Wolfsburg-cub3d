@@ -4,6 +4,7 @@ int	main(int argc, char **argv)
 {
 	t_params	data;
 
+	ft_bzero(&data, sizeof(t_params));
 	if (argc != 2)
 	{
 		write (1, "\x1b[31mWRONG NUMBER OF ARGUMENTS\n\x1b[0m", 36);
@@ -12,9 +13,7 @@ int	main(int argc, char **argv)
 	if (parse_cub(&data, argv))
 		return (1);
 	create_window(&data);
-	ft_free_array(data.config->xpm);
-	free(data.config);
-	// init_map_data();
+	clean_exit(&data, EXIT_FAILURE);
 }
 
 int	parse_cub(t_params *data, char **argv)
@@ -24,18 +23,13 @@ int	parse_cub(t_params *data, char **argv)
 	open_map(data, argv[1]);
 	read_configuration(data);
 	if (check_found(data))
-		return (free(data->config), 1);
+		clean_exit(data, EXIT_FAILURE);
 	data->config->f_color = handle_rgb(data->config->xpm[4], (int *)error);
 	data->config->c_color = handle_rgb(data->config->xpm[5], (int *)error + 1);
-	if (error[0] || error[1])
-	{
-		printf("Error\n");
-		if (error[0])
-			printf("Cub3D: \"F\": invalid configuration (expected: R,G,B)\n");
-		if (error[1])
-			printf("Cub3D: \"C\": invalid configuration (expected: R,G,B)\n");
-		ft_free_array(data->config->xpm);
-		return (free(data->config), 1);
-	}
+	if (check_colors(error))
+		clean_exit(data, EXIT_FAILURE);
+	// read_map()
+	// if (check_map())
+	// 	return (1);
 	return (0);
 }

@@ -8,7 +8,7 @@
 int	handle_key_press(int keycode, t_params *data)
 {
 	printf("Keycode: %i\n", keycode);
-	if (keycode == 53)
+	if (keycode == XK_Escape)
 		close_window(data);
 	return (0);
 }

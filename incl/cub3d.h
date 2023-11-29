@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <X11/keysym.h>
 
 # define NOT_SPECIFIED "not specified"
 # define INVALID_CONFIG "invalid configuration"
@@ -41,6 +42,7 @@ int					handle_key_press(int keycode, t_params *data);
 int					close_window(t_params *data);
 int					identifier_value_pos(char *str, char *search);
 int					check_found(t_params *data);
+int					check_colors(const int *error);
 int					open_textures(t_params *data);
 bool				create_window(t_params *data);
 void				read_configuration(t_params *data);
@@ -53,4 +55,6 @@ int					handle_rgb_helper(char **arr);
 int					check_rgb_code(char *str);
 int					parse_cub(t_params *data, char **argv);
 char				*gnl_w_counter(t_params *data, int fd);
+void				clean_exit(t_params *params, int exit_code);
+
 #endif

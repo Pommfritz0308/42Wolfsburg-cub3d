@@ -29,7 +29,7 @@ void	read_configuration(t_params *data)
 	int			i;
 	char		*l;
 
-	data->config = malloc(sizeof(t_config));
+	data->config = ft_calloc(1, sizeof(t_config));
 	data->config->found = ft_calloc(6, sizeof(int));
 	data->config->xpm = ft_calloc(7, sizeof(char *));
 	l = gnl_w_counter(data, data->map_fd);
@@ -120,6 +120,7 @@ int	check_found(t_params *data)
 				printf("Cub3D: \"%s\": not specified\n", identifier[i]);
 		}
 		free(data->config->xpm);
+		data->config->xpm = NULL;
 	}
-	return (free(data->config->found), ret);
+	return (ret);
 }
