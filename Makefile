@@ -21,7 +21,8 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 
 SRC_PATH	= src/
-SRC	=	check_colors.c \
+SRC	=	check_map.c \
+		check_colors.c \
 		clean_exit.c \
 		main.c \
  		inits.c \
@@ -49,7 +50,7 @@ $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
-	@make -sC $(MLX_PATH)
+	@make -sC $(MLX_PATH) >/dev/null 2>&1
 	@echo "$(COLOUR_GREEN)mlx ready$(END_COLOUR)"
 
 $(LIBFT):
