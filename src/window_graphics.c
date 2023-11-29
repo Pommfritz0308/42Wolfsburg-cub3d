@@ -1,4 +1,4 @@
-#include "../incl/cub3d.h"
+#include "cub3d.h"
 
 bool	create_window(t_params *data)
 {

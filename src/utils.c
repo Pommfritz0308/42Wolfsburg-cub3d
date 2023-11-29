@@ -1,4 +1,4 @@
-#include "../incl/cub3d.h"
+#include "cub3d.h"
 
 unsigned int	rgb_to_hex(int r, int g, int b)
 {

@@ -1,4 +1,4 @@
-#include "../incl/cub3d.h"
+#include "cub3d.h"
 
 void	open_map(t_params *data, char *file)
 {

@@ -1,47 +1,80 @@
-SRCS	=	man/main.c man/inits.c man/window_graphics.c man/events.c man/parser_config.c man/utils.c man/parser_config2.c \
-			man/parser_map.c
-OBJS = $(SRCS:.c=.o)
+NAME	= cub3D
 
-BONUS =
-BONUS_OBJS = $(BONUS:.c=.o)
+CC		= gcc
+CFLAGS	= -Werror -Wextra -Wall -g
+INC			=	-I ./libft/\
+				-I ./mlx/\
+				-I/usr/X11/include \
+				-I ./incl
 
-CC = cc
-RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -g -I libft/ -fsanitize=address
-LIBFT_DIR		= libft
-MINILIBX_DIR	= minilibx
-LIBFT			= $(LIBFT_DIR)/libft.a
-MINILIBX		= $(MINILIBX_DIR)/libmlx.a
-LIBS			= -L$(LIBFT_DIR) -lft
-MLIBX			= -L$(MINILIBX_DIR) -lmlx
+LFLAGS = -L/usr/X11/lib -lX11 -lXext -lm
 
-NAME = cub3D
 
-all: $(LIBFT) $(MINILIBX) $(NAME)
+MLX_PATH	= mlx/
+MLX_NAME	= libmlx.a
+MLX			= $(MLX_PATH)$(MLX_NAME)
+
+LIBFT_PATH	= libft/
+LIBFT_NAME	= libft.a
+LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
+
+
+
+SRC_PATH	= src/
+SRC	=	main.c \
+ 		inits.c \
+ 		window_graphics.c \
+ 		events.c \
+ 		parser_config.c \
+ 		utils.c \
+ 		parser_config2.c \
+		parser_map.c \ 
+
+SRCS		= $(addprefix $(SRC_PATH), $(SRC))
+
+OBJ_PATH	= obj/
+OBJ			= $(SRC:.c=.o)
+OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
+
+all: $(MLX) $(LIBFT) $(NAME)
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+
+$(OBJS): $(OBJ_PATH)
+
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH)
+
+$(MLX):
+	@make -sC $(MLX_PATH)
+	@echo "$(COLOUR_GREEN)mlx ready$(END_COLOUR)"
 
 $(LIBFT):
-	@ $(MAKE) -C $(LIBFT_DIR)
-
-$(MINILIBX):
-	@ $(MAKE) -C $(MINILIBX_DIR) >/dev/null 2>&1
+	@make -sC $(LIBFT_PATH)
+	@echo "$(COLOUR_GREEN)libft ready$(END_COLOUR)"
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(MLIBX) -framework OpenGL -framework AppKit
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(LFLAGS) $(INC)
+	@echo "$(COLOUR_GREEN)cub3D ready$(END_COLOUR)"
+
+bonus: all
 
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(MINILIBX_DIR) clean
+	@rm -rf $(OBJ_PATH)
+	@make clean -C $(MLX_PATH)
+	@make clean -C $(LIBFT_PATH)
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(MINILIBX_DIR) clean
+	@rm -f $(NAME)
+	@rm -f $(MLX_PATH)$(MLX_NAME)
+	@rm -f $(LIBFT_PATH)$(LIBFT_NAME)
 
 re: fclean all
 
-bonus: $(BONUS_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(BONUS_OBJS) $(LIBS)
+.PHONY: all re clean fclean bonus
 
-.PHONY: all clean fclean bonus re
-
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_BLUE=\033[0;34m
+END_COLOUR=\033[0m

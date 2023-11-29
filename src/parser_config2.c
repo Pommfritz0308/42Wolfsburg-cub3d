@@ -1,4 +1,4 @@
-#include "../incl/cub3d.h"
+#include "cub3d.h"
 
 int	handle_rgb(char *str, int *error)
 {
