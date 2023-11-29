@@ -28,7 +28,7 @@ SRC	=	main.c \
  		parser_config.c \
  		utils.c \
  		parser_config2.c \
-		parser_map.c \ 
+		parser_map.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -42,9 +42,6 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
-
-$(OBJ_PATH):
-	@mkdir $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH)
