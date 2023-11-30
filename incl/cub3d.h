@@ -18,6 +18,7 @@
 struct	s_config;
 
 typedef struct s_params {
+	int				map;
 	void			*win;
 	void			*mlx;
 	int				map_fd;
@@ -36,6 +37,12 @@ typedef struct s_config {
 	char			**xpm;
 }	t_config;
 
+typedef struct s_point {
+	int				x;
+	int				y;
+}	t_point;
+
+int					check_map(t_params *params);
 void				identifier_value(t_params *data,
 						char *identifier, char *l, int i);
 unsigned int		rgb_to_hex(int r, int g, int b);
