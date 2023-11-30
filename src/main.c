@@ -12,8 +12,8 @@ int	main(int argc, char **argv)
 	}
 	if (parse_cub(&data, argv))
 		return (1);
-	create_window(&data);
-	clean_exit(&data, EXIT_FAILURE);
+	// create_window(&data);
+	// clean_exit(&data, EXIT_FAILURE);
 }
 
 int	parse_cub(t_params *data, char **argv)
@@ -28,7 +28,7 @@ int	parse_cub(t_params *data, char **argv)
 	data->config->c_color = handle_rgb(data->config->xpm[5], (int *)error + 1);
 	if (check_colors(error))
 		clean_exit(data, EXIT_FAILURE);
-	// read_map()
+	check_map(data);
 	// if (check_map())
 	// 	return (1);
 	return (0);
