@@ -11,7 +11,7 @@ static int	valid_characters(int **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!ft_strchr("012NSEW ", map[i][j]))
+			if (!ft_strchr("01NSEW ", map[i][j]))
 				return (0);
 			j++;
 		}
@@ -68,17 +68,19 @@ static t_point	find_spawnpoint(int **map)
 
 static int	is_enclosed(int **map, int x, int y)
 {
-	if (x < 0 || y < 0 || map[x][y] == 0)
+	if (x < 0 || y < 0 || map[x][y] == '0')
 		return (0);
-	if (map[x][y] == 0)
+	if (map[x][y] == -1 || map[x][y] == '1')
 		return (1);
+	map[x][y] = -1;
 	return (is_enclosed(map, x - 1, y) && is_enclosed(map, x, y - 1)
 		&& is_enclosed(map, x + 1, y) && is_enclosed(map, x, y + 1));
 }
+
 int data[][4] = {
 	{'1', '1', '1', 0},
 	{'1', 'W', '1', 0},
-	{'1', '1', '1', 0},
+	{'1', '0', '1', 0},
 	{0, 0, 0, 0},
 };
 
@@ -100,8 +102,12 @@ int	check_map(t_params *params)
 		return (0);
 	}
 	spawnpoint = find_spawnpoint(doubleIntPtr);
-	// printf("Spawnpoint: %d, %d\n", spawnpoint.x, spawnpoint.y);
-	// if (is_enclosed(doubleIntPtr, spawnpoint.x, spawnpoint.y))
-	// 	printf("Map is not enclosed\n");
+	printf("Spawnpoint: %d, %d\n", spawnpoint.x, spawnpoint.y);
+	if (!is_enclosed(doubleIntPtr, spawnpoint.x, spawnpoint.y))
+	{
+		printf("Map is not enclosed\n");
+		return (0);
+	}
+	printf("Map is valid\n");
 	return (1);
 }
