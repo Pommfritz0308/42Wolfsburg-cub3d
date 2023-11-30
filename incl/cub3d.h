@@ -57,6 +57,5 @@ int					parse_cub(t_params *data, char **argv);
 char				*gnl_w_counter(t_params *data, int fd);
 void				clean_exit(t_params *params, int exit_code);
 char				**read_map(t_params *data);
-void				check_nline(char *temp, char *l,
-						int *start, t_params *data);
+char				*skip_nline(char *l, t_params *data);
 #endif

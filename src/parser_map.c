@@ -10,22 +10,35 @@ char	**read_map(t_params *data)
 	char	**map;
 	char	*l;
 	char	*temp;
+	char	*new;
 	int		start;
 
 	start = 0;
-	l = gnl_w_counter(data, data->map_fd);
-	temp = l;
-	check_nline(temp, l, &start, data);
+	l = skip_nline(l, data);
 	while (l && l[0] != '\n')
 	{
-		l = gnl_w_counter(data, data->map_fd);
-		if (l)
-			temp = ft_strjoin(temp, l);
+		
 	}
-	check_nline(temp, l, &start, data);
-	map = ft_split(temp, '\n');
+	map = ft_split(new, '\n');
 	print_tab(map);
+	check_nline(l, &start, data);
 	close(data->map_fd);
+	return (NULL);
+}
+
+
+char	*skip_nline(char *l, t_params *data)
+{
+	char	*l;
+
+	l = gnl_w_counter(data->config->map_fd);
+	while (l && l[0] == '\n')
+	{
+		free(l)
+		l = gnl_w_counter(data->config->map_fd);
+		if (l && l[0] != '\n')
+			return (l);
+	}
 	return (NULL);
 }
 
@@ -43,28 +56,3 @@ char	**read_map(t_params *data)
 // 	free(str);
 // 	return (arr);
 // }
-
-void	check_nline(char *temp, char *l, int *start, t_params *data)
-{
-	while (l)
-	{
-		if (l)
-			free(l);
-		if (l[0] != '\n')
-		{
-			if (*start)
-			{
-				if (l)
-					free(l);
-				free(temp);
-				clean_exit(data, EXIT_FAILURE);
-			}
-			else
-			{
-				*start = 1;
-				return ;
-			}
-		}
-		l = gnl_w_counter(data, data->map_fd);
-	}
-}
