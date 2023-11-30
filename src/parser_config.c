@@ -10,7 +10,7 @@ void	open_map(t_params *data, char *file)
 		error_msg("wrong file format (expected: *.cub)", file);
 		exit(1);
 	}
-	path = ft_strjoin("/Users/fbohling/Desktop/cub3d/maps/", file);
+	path = ft_strjoin("./maps/", file);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
