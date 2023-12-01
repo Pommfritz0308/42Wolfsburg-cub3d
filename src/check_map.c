@@ -68,7 +68,7 @@ static t_point	find_spawnpoint(int **map)
 
 static int	is_enclosed(int **map, int x, int y)
 {
-	if (x < 0 || y < 0 || map[x][y] == '0')
+	if (x < 0 || y < 0 || map[x][y] == 0)
 		return (0);
 	if (map[x][y] == -1 || map[x][y] == '1')
 		return (1);
@@ -77,14 +77,16 @@ static int	is_enclosed(int **map, int x, int y)
 		&& is_enclosed(map, x + 1, y) && is_enclosed(map, x, y + 1));
 }
 
-int data[][4] = {
-	{'1', '1', '1', 0},
-	{'1', 'W', '1', 0},
-	{'1', '0', '1', 0},
-	{0, 0, 0, 0},
+int data[][6] = {
+{'1', '1', '1', '1', '1', 0},
+{'1', 'E', '0', '1', '1', 0},
+{'1', '0', '1', '1', '1', 0},
+{'1', '0', '0', '0', '1', 0},
+{'1', '1', '1', '1', '1', 0},
+{0, 0, 0, 0, 0, 0},
 };
 
-int *doubleIntPtr[] = {data[0], data[1], data[2], data[3], NULL};
+int *doubleIntPtr[] = {data[0], data[1], data[2], data[3], data[4], data[5], NULL};
 
 int	check_map(t_params *params)
 {
