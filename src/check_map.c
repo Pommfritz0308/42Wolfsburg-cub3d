@@ -46,7 +46,7 @@ static int	has_spawnpoint(char **map)
 	return (spawnpoint);
 }
 
-static t_point	find_spawnpoint(char **map)
+t_point	find_spawnpoint(char **map)
 {
 	int	i;
 	int	j;

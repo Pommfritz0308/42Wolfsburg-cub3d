@@ -2,12 +2,18 @@
 
 static void	draw_frame(t_params *data)
 {
-	int	x;
+	int		x;
+	t_point	ray_dir;
 
+	ray_dir = 0;
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		
+		data->game->cam->x = 2 * x / (double)WINDOW_WIDTH - 1;
+		ray_dir.x = data->game->dir->x
+			+ data->game->plane->x * data->game->cam->x;
+		ray_dir.y = data->game->dir->y +
+			data->game->plane->y * data->game->cam->y;
 		x++;
 	}
 }

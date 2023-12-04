@@ -28,7 +28,10 @@ typedef struct s_game
 	t_point		pos;
 	t_point		dir;
 	t_point		plane;
+	t_point		cam;
 	int			player_moved;
+	int			won;
+	int			lost;
 }	t_game;
 
 typedef struct s_params
@@ -53,7 +56,7 @@ typedef struct s_config {
 }	t_config;
 
 void				*setup_variables(t_params *data);
-t_point				find_spawnpoint(int **map);
+t_point				find_spawnpoint(char **map);
 int					game_loop(t_params *data);
 int					check_map(t_params *params);
 void				identifier_value(t_params *data,
