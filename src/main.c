@@ -30,9 +30,13 @@ int	parse_cub(t_params *data, char **argv)
 	if (check_colors(error))
 		clean_exit(data, EXIT_FAILURE);
 	read_map(data);
+	if (!data->map)
+	{
+		printf("Error\nCub3D: map not found\n");
+		clean_exit(data, 1);
+	}
 	data->map = copy_and_equalize(data, data->map, ' ');
-	check_map(data);
-	// if (check_map())
-	// 	return (1);
+	if (!check_map(data))
+		clean_exit(data, 1);
 	return (0);
 }

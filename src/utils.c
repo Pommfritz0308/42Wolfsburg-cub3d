@@ -72,3 +72,4 @@ void	put_color_msg(char *color, char *str)
 	ft_putendl_fd(str, 2);
 	write(1, "\x1b[0m", 5);
 }
+
