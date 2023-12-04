@@ -17,36 +17,18 @@
 
 struct	s_config;
 
-int data[][6] = {
-{'1', '1', '1', '1', '1', 0},
-{'1', 'E', '0', '1', '1', 0},
-{'1', '0', '1', '1', '1', 0},
-{'1', '0', '0', '0', '1', 0},
-{'1', '1', '1', '1', '1', 0},
-{0, 0, 0, 0, 0, 0},
-};
-
-int *map[] = {data[0], data[1], data[2], data[3], data[4], data[5], NULL};
-
-
 typedef struct s_point
-{
-	int				x;
-	int				y;
-}	t_point;
-
-typedef struct s_d_point
 {
 	double			x;
 	double			y;
-}	t_d_point;
+}	t_point;
 
 typedef struct s_game
 {
-	t_d_point		pos;
-	t_d_point		dir;
-	t_d_point		plane;
-	int				player_moved;
+	t_point		pos;
+	t_point		dir;
+	t_point		plane;
+	int			player_moved;
 }	t_game;
 
 typedef struct s_params
