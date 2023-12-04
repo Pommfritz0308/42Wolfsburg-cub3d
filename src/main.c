@@ -12,7 +12,7 @@ int	main(int argc, char **argv)
 	}
 	if (parse_cub(&data, argv))
 		return (1);
-	// create_window(&data);
+	create_window(&data);
 	clean_exit(&data, EXIT_FAILURE);
 }
 
@@ -26,12 +26,12 @@ int	parse_cub(t_params *data, char **argv)
 		clean_exit(data, EXIT_FAILURE);
 	data->config->f_color = handle_rgb(data->config->xpm[4], (int *)error);
 	data->config->c_color = handle_rgb(data->config->xpm[5], (int *)error + 1);
+	put_color_msg("\x1b[32m", "Configuration √");
 	if (check_colors(error))
 		clean_exit(data, EXIT_FAILURE);
 	read_map(data);
-	print_tab(data->map);
 	data->map = copy_and_equalize(data, data->map, ' ');
-	// check_map(data);
+	check_map(data);
 	// if (check_map())
 	// 	return (1);
 	return (0);

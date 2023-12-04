@@ -110,6 +110,6 @@ int	check_map(t_params *params)
 		printf("Map is not enclosed\n");
 		return (0);
 	}
-	printf("Map is valid\n");
+	put_color_msg("\x1b[32m", "Map √");
 	return (1);
 }
