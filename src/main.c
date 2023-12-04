@@ -28,6 +28,10 @@ int	parse_cub(t_params *data, char **argv)
 	data->config->c_color = handle_rgb(data->config->xpm[5], (int *)error + 1);
 	if (check_colors(error))
 		clean_exit(data, EXIT_FAILURE);
+	read_map(data);
+	print_tab(data->map);
+	data->map = copy_and_equalize(data, data->map, ' ');
+	printf("%s\n", data->map[4]);
 	check_map(data);
 	// if (check_map())
 	// 	return (1);
