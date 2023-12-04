@@ -6,11 +6,12 @@
 /*   By: fbohling <fbohling@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:49:00 by fbohling          #+#    #+#             */
-/*   Updated: 2023/11/13 15:32:52 by fbohling         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:17:12 by fbohling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {
@@ -91,7 +92,7 @@ char	*get_remainder(char *stash)
 	start = 0;
 	while (stash[start] != '\n' && stash[start])
 		start++;
-	temp = malloc((ft_strlen_gnl(stash) - start + 1) * sizeof(char));
+	temp = ft_calloc((ft_strlen_gnl(stash) - start + 1), sizeof(char));
 	remainder = ft_strlen_gnl(stash) - start - 1;
 	if (temp == NULL)
 		return (NULL);
@@ -101,6 +102,5 @@ char	*get_remainder(char *stash)
 		temp[i] = stash[start + i];
 		i++;
 	}
-	temp[i] = '\0';
 	return (free(stash), temp);
 }

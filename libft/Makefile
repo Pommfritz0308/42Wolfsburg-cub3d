@@ -6,7 +6,7 @@
 #    By: fbohling <fbohling@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 12:30:22 by fbohling          #+#    #+#              #
-#    Updated: 2023/11/28 10:35:58 by fbohling         ###   ########.fr        #
+#    Updated: 2023/12/04 10:56:45 by fbohling         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS			=	ft_isalnum.c ft_isprint.c \
 					ft_lstnew.c ft_lstadd_front.c  ft_lstsize.c ft_lstlast.c \
 					ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 					ft_strupper.c ft_strtolower.c ft_atof.c ft_free_array.c ft_split_with_quotations.c \
-					ft_count_char.c gnl/get_next_line.c gnl/get_next_line_utils.c ft_check_file_format.c
+					ft_count_char.c gnl/get_next_line.c gnl/get_next_line_utils.c ft_check_file_format.c \
+					ft_tablen.c
 
 OBJS			= $(SRCS:.c=.o)
 

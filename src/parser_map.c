@@ -9,10 +9,8 @@ char	**read_map(t_params *data)
 {
 	char	*l;
 	char	*new;
-	int		start;
 	char	*temp;
 
-	start = 0;
 	new = NULL;
 	l = skip_nline(data);
 	while (l && l[0] != '\n')
@@ -34,12 +32,9 @@ char	**read_map(t_params *data)
 	}
 	check_nline(data, l, new);
 	data->map = ft_split(new, '\n');
-	free(new);
-	print_tab(data->map);
 	close(data->map_fd);
-	return (NULL);
+	return (free(new), NULL);
 }
-
 
 char	*skip_nline(t_params *data)
 {
@@ -74,10 +69,35 @@ void	check_nline(t_params *data, char *l, char *str)
 	return ;
 }
 
-// char	**copy_and_equalize(char **arr, char c)
-// {
+char	**copy_and_equalize(t_params *data, char **a, int c)
+{
+	int			i;
+	size_t		max_l;
+	char		**new;
 
-// }
+	if (!a[0] || !a)
+		clean_exit(data, 1);
+	max_l = 0;
+	i = -1;
+	while (a[++i])
+	{
+		if (ft_strlen(a[i]) > max_l)
+			max_l = ft_strlen(a[i]);
+	}
+	new = ft_calloc(i + 1, sizeof(char *));
+	i = -1;
+	while (a[++i])
+	{
+		new[i] = ft_calloc(max_l + 1, sizeof(char));
+		ft_strlcpy(new[i], a[i], max_l + 1);
+		if (ft_strlen(a[i]) < max_l)
+			ft_memset((void *)(new[i] + ft_strlen(a[i])),
+				c, max_l - ft_strlen(a[i]));
+	}
+	ft_free_array(a);
+	print_tab(new);
+	return (new);
+}
 
 // int	*convert_char_to_int(char *str)
 // {
