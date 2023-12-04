@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static int	valid_characters(int **map)
+static int	valid_characters(char **map)
 {
 	int	i;
 	int	j;
@@ -20,7 +20,7 @@ static int	valid_characters(int **map)
 	return (1);
 }
 
-static int	has_spawnpoint(int **map)
+static int	has_spawnpoint(char **map)
 {
 	int	i;
 	int	j;
@@ -46,7 +46,7 @@ static int	has_spawnpoint(int **map)
 	return (spawnpoint);
 }
 
-t_point	find_spawnpoint(int **map)
+static t_point	find_spawnpoint(char **map)
 {
 	int	i;
 	int	j;
@@ -66,7 +66,7 @@ t_point	find_spawnpoint(int **map)
 	return ((t_point){-1, -1});
 }
 
-static int	is_enclosed(int **map, int x, int y)
+static int	is_enclosed(char **map, int x, int y)
 {
 	if (x < 0 || y < 0 || map[x] == NULL || map[x][y] == 0)
 		return (0);
@@ -81,24 +81,22 @@ int	check_map(t_params *params)
 {
 	t_point	spawnpoint;
 
-	(void)params;
-	if (!valid_characters(map))
+	if (!valid_characters(params->map))
 	{
-		printf("Invalid characters in map\n");
+		printf("Error\nCub3D: invalid characters in map\n");
 		return (0);
 	}
-	if (!has_spawnpoint(map))
+	if (!has_spawnpoint(params->map))
 	{
-		printf("Wrong amount of spawnpoints\n");
+		printf("Error\nCub3D: wrong amount of spawnpoints\n");
 		return (0);
 	}
-	spawnpoint = find_spawnpoint(map);
-	printf("Spawnpoint: %d, %d\n", spawnpoint.x, spawnpoint.y);
-	if (!is_enclosed(map, spawnpoint.x, spawnpoint.y))
+	spawnpoint = find_spawnpoint(params->map);
+	if (!is_enclosed(params->map, spawnpoint.x, spawnpoint.y))
 	{
-		printf("Map is not enclosed\n");
+		printf("Error\nCub3D: map is not enclosed\n");
 		return (0);
 	}
-	printf("Map is valid\n");
+	put_color_msg("\x1b[32m", "Map √");
 	return (1);
 }

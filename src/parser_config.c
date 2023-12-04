@@ -73,7 +73,7 @@ int	identifier_value_pos(char *str, char *search)
 		return (-1);
 	while (str[i])
 	{
-		if (str[i] == ' ')
+		if (str[i] == ' ' || str[i] == '\t')
 		{
 			i++;
 			continue ;

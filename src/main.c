@@ -27,14 +27,17 @@ int	parse_cub(t_params *data, char **argv)
 		clean_exit(data, EXIT_FAILURE);
 	data->config->f_color = handle_rgb(data->config->xpm[4], (int *)error);
 	data->config->c_color = handle_rgb(data->config->xpm[5], (int *)error + 1);
+	put_color_msg("\x1b[32m", "Configuration √");
 	if (check_colors(error))
 		clean_exit(data, EXIT_FAILURE);
 	read_map(data);
-	print_tab(data->map);
+	if (!data->map)
+	{
+		printf("Error\nCub3D: map not found\n");
+		clean_exit(data, 1);
+	}
 	data->map = copy_and_equalize(data, data->map, ' ');
-	printf("%s\n", data->map[4]);
-	check_map(data);
-	// if (check_map())
-	// 	return (1);
+	if (!check_map(data))
+		clean_exit(data, 1);
 	return (0);
 }

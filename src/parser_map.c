@@ -9,10 +9,8 @@ char	**read_map(t_params *data)
 {
 	char	*l;
 	char	*new;
-	int		start;
 	char	*temp;
 
-	start = 0;
 	new = NULL;
 	l = skip_nline(data);
 	while (l && l[0] != '\n')
@@ -34,12 +32,9 @@ char	**read_map(t_params *data)
 	}
 	check_nline(data, l, new);
 	data->map = ft_split(new, '\n');
-	free(new);
-	print_tab(data->map);
 	close(data->map_fd);
-	return (NULL);
+	return (free(new), NULL);
 }
-
 
 char	*skip_nline(t_params *data)
 {
@@ -58,26 +53,54 @@ char	*skip_nline(t_params *data)
 
 void	check_nline(t_params *data, char *l, char *str)
 {
+	int	n_line_found;
+
+	n_line_found = 0;
 	while (l)
 	{
 		if (l[0] != '\n')
 		{
-			free(l);
 			free(str);
 			ft_putendl_fd("Error", 2);
 			ft_putendl_fd("Cub3D: new line in map detected", 2);
-			clean_exit(data, 1);
+			n_line_found = 1;
 		}
 		free(l);
 		l = gnl_w_counter(data, data->map_fd);
 	}
+	if (n_line_found)
+		clean_exit(data, 1);
 	return ;
 }
 
-// char	**copy_and_equalize(char **arr, char c)
-// {
+char	**copy_and_equalize(t_params *data, char **a, int c)
+{
+	int			i;
+	size_t		max_l;
+	char		**new;
 
-// }
+	if (!a[0] || !a)
+		clean_exit(data, 1);
+	max_l = 0;
+	i = -1;
+	while (a[++i])
+	{
+		if (ft_strlen(a[i]) > max_l)
+			max_l = ft_strlen(a[i]);
+	}
+	new = ft_calloc(i + 1, sizeof(char *));
+	i = -1;
+	while (a[++i])
+	{
+		new[i] = ft_calloc(max_l + 1, sizeof(char));
+		ft_strlcpy(new[i], a[i], max_l + 1);
+		if (ft_strlen(a[i]) < max_l)
+			ft_memset((void *)(new[i] + ft_strlen(a[i])),
+				c, max_l - ft_strlen(a[i]));
+	}
+	ft_free_array(a);
+	return (new);
+}
 
 // int	*convert_char_to_int(char *str)
 // {

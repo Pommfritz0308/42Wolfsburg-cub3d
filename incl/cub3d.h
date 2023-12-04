@@ -80,4 +80,6 @@ void				clean_exit(t_params *params, int exit_code);
 char				**read_map(t_params *data);
 char				*skip_nline(t_params *data);
 void				check_nline(t_params *data, char *l, char *str);
+char				**copy_and_equalize(t_params *data, char **a, int c);
+void				put_color_msg(char *color, char *str);
 #endif

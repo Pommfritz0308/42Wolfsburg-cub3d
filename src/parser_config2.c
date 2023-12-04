@@ -12,7 +12,7 @@ int	handle_rgb(char *str, int *error)
 		return (0);
 	}
 	arr = ft_split(str, ',');
-	while (arr[i])
+	while (arr && arr[i])
 		i++;
 	if (i != 3)
 	{
@@ -29,7 +29,8 @@ int	check_rgb_code(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[i] == ',' || str[i] == ' ')
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == ','
+			|| str[i] == ' ' || str[i] == '\t')
 			i++;
 		else
 			return (1);

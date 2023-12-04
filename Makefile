@@ -31,6 +31,7 @@ SRC	=	check_map.c \
  		events.c \
  		parser_config.c \
  		utils.c \
+		utils2.c \
  		parser_config2.c \
 		parser_map.c
 
