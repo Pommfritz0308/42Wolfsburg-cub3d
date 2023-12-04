@@ -17,14 +17,47 @@
 
 struct	s_config;
 
-typedef struct s_params {
-	int				map;
+int data[][6] = {
+{'1', '1', '1', '1', '1', 0},
+{'1', 'E', '0', '1', '1', 0},
+{'1', '0', '1', '1', '1', 0},
+{'1', '0', '0', '0', '1', 0},
+{'1', '1', '1', '1', '1', 0},
+{0, 0, 0, 0, 0, 0},
+};
+
+int *map[] = {data[0], data[1], data[2], data[3], data[4], data[5], NULL};
+
+
+typedef struct s_point
+{
+	int				x;
+	int				y;
+}	t_point;
+
+typedef struct s_d_point
+{
+	double			x;
+	double			y;
+}	t_d_point;
+
+typedef struct s_game
+{
+	t_d_point		pos;
+	t_d_point		dir;
+	t_d_point		plane;
+	int				player_moved;
+}	t_game;
+
+typedef struct s_params
+{
 	void			*win;
 	void			*mlx;
 	int				map_fd;
 	int				line_n;
 	int				count;
 	char			**map;
+	t_game			game;
 	struct s_config	*config;
 }	t_params;
 
@@ -37,11 +70,9 @@ typedef struct s_config {
 	char			**xpm;
 }	t_config;
 
-typedef struct s_point {
-	int				x;
-	int				y;
-}	t_point;
-
+void				*setup_variables(t_params *data);
+t_point				find_spawnpoint(int **map);
+int					game_loop(t_params *data);
 int					check_map(t_params *params);
 void				identifier_value(t_params *data,
 						char *identifier, char *l, int i);

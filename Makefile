@@ -22,6 +22,7 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 SRC_PATH	= src/
 SRC	=	check_map.c \
+		game_loop.c \
 		check_colors.c \
 		clean_exit.c \
 		main.c \

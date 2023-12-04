@@ -12,7 +12,8 @@ int	main(int argc, char **argv)
 	}
 	if (parse_cub(&data, argv))
 		return (1);
-	// create_window(&data);
+	setup_variables(&data);
+	create_window(&data);
 	clean_exit(&data, EXIT_FAILURE);
 }
 
