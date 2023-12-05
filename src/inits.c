@@ -4,7 +4,7 @@ void	*setup_variables(t_params *data)
 {
 	t_point	start;
 
-	start = find_spawnpoint(map);
+	start = find_spawnpoint(data->map);
 	data->game.pos.x = start.x + 0.5;
 	data->game.pos.y = start.y + 0.5;
 	data->game.dir.x = -1;

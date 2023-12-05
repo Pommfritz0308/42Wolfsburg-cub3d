@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <math.h>
 # include <X11/keysym.h>
 
 # define NOT_SPECIFIED "not specified"
@@ -29,6 +30,9 @@ typedef struct s_game
 	t_point		dir;
 	t_point		plane;
 	t_point		cam;
+	t_point		map;
+	t_point		dist;
+	t_point		step;
 	int			player_moved;
 	int			won;
 	int			lost;
@@ -42,11 +46,13 @@ typedef struct s_params
 	int				line_n;
 	int				count;
 	char			**map;
+	void			*img;
 	t_game			game;
 	struct s_config	*config;
 }	t_params;
 
-typedef struct s_config {
+typedef struct s_config
+{
 	int				c_flag;
 	int				*found;
 	int				p;

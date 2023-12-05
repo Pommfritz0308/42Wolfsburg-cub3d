@@ -1,26 +1,67 @@
 #include "cub3d.h"
 
-static void	draw_frame(t_params *data)
+static t_point	calc_ray(t_game *game, int x)
+{
+	t_point	ray_dir;
+
+	game->cam.x = 2 * x / (double)WINDOW_WIDTH - 1;
+	ray_dir.x = game->dir.x
+		+ game->plane.x * game->cam.x;
+	ray_dir.y = game->dir.y
+		+ game->plane.y * game->cam.y;
+	return (ray_dir);
+}
+
+static void	calc_delta_distance(t_game *game, t_point ray_dir)
+{
+	game->map.x = floor(game->pos.x);
+	game->map.y = floor(game->pos.y);
+	if (!ray_dir.x)
+		game->dist.x = INFINITY;
+	else
+		game->dist.x = fabs(1 / ray_dir.x);
+	if (!ray_dir.y)
+		game->dist.y = INFINITY;
+	else
+		game->dist.y = fabs(1 / ray_dir.y);
+}
+
+// static void	calc_side_distance(t_game *game)
+// {
+// 	if (game->ray_dir.x < 0)
+// 	{
+// 		game->step.x = -1;
+// 		sideDistX = (posX - mapX) * deltaDistX;
+// 	}
+// 	else
+// 	{
+// 		game->step.x = 1;
+// 		sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+// 	}
+// 	if (game->ray_dir.y < 0)
+// 	{
+// 		game->step.y -1;
+// 		sideDistY = (posY - mapY) * deltaDistY;
+// 	}
+// 	else
+// 	{
+// 		game->step.y = 1;
+// 		sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+// 	}
+// }
+
+static void	draw_frame(t_game *game)
 {
 	int		x;
 	t_point	ray_dir;
 
-	ray_dir = 0;
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		calc_vector(data, x, ray_dir);
+		ray_dir = calc_ray(game, x);
+		calc_delta_distance(game, ray_dir);
 		x++;
 	}
-}
-
-static void	calc_vector(t_params *data, int x, t_point ray_dir)
-{
-	data->game->cam->x = 2 * x / (double)WINDOW_WIDTH - 1;
-	ray_dir.x = data->game->dir->x
-		+ data->game->plane->x * data->game->cam->x;
-	ray_dir.y = data->game->dir->y
-		+ data->game->plane->y * data->game->cam->y;
 }
 
 int	game_loop(t_params *data)
@@ -32,8 +73,8 @@ int	game_loop(t_params *data)
 	if (data->game.player_moved)
 	{
 		data->game.player_moved = 0;
-		draw_frame(data);
-		mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+		draw_frame(&(data->game));
+		// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	}
 	return (0);
 }
