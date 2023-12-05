@@ -31,12 +31,22 @@ typedef struct s_game
 	t_point		plane;
 	t_point		cam;
 	t_point		map;
-	t_point		dist;
+	t_point		d_dist;
 	t_point		step;
+	t_point		s_dist;
 	int			player_moved;
 	int			won;
 	int			lost;
 }	t_game;
+
+typedef struct s_image
+{
+	void			*ptr;
+	char			*buffer;
+	int				pixel_bits;
+	int				line_bytes;
+	int				endian;
+}	t_image;
 
 typedef struct s_params
 {
@@ -46,7 +56,7 @@ typedef struct s_params
 	int				line_n;
 	int				count;
 	char			**map;
-	void			*img;
+	t_image			image;
 	t_game			game;
 	struct s_config	*config;
 }	t_params;
@@ -61,6 +71,7 @@ typedef struct s_config
 	char			**xpm;
 }	t_config;
 
+void				my_mlx_pixel_put(t_image image, int x, int y, int color);
 void				*setup_variables(t_params *data);
 t_point				find_spawnpoint(char **map);
 int					game_loop(t_params *data);

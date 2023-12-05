@@ -1,7 +1,7 @@
 NAME	= cub3D
 
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g
+CFLAGS	= -Werror -Wextra -Wall -g -fsanitize=address
 INC			=	-I ./libft/\
 				-I ./mlx/\
 				-I/usr/X11/include \
