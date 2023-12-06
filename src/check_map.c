@@ -77,10 +77,30 @@ static int	is_enclosed(char **map, int x, int y)
 		&& is_enclosed(map, x + 1, y) && is_enclosed(map, x, y + 1));
 }
 
+static void	restore_map(char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (map[x])
+	{
+		y = 0;
+		while (map[x][y])
+		{
+			if (map[x][y] == -1)
+				map[x][y] = '0';
+			y++;
+		}
+		x++;
+	}
+}
+
 int	check_map(t_params *params)
 {
 	t_point	spawnpoint;
 
+	print_tab(params->map);
 	if (!valid_characters(params->map))
 	{
 		printf("Error\nCub3D: invalid characters in map\n");
@@ -98,5 +118,7 @@ int	check_map(t_params *params)
 		return (0);
 	}
 	put_color_msg("\x1b[32m", "Map √");
+	restore_map(params->map);
+	print_tab(params->map);
 	return (1);
 }
