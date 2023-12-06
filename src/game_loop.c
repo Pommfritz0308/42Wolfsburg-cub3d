@@ -103,6 +103,7 @@ static void	draw_frame(t_params *data)
 		dda(data, x);
 		x++;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
 }
 
 int	game_loop(t_params *data)
