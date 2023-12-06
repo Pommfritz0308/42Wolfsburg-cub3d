@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 	}
 	if (parse_cub(&data, argv))
 		return (1);
+	data.mlx = mlx_init();
 	setup_variables(&data);
 	create_window(&data);
 	clean_exit(&data, EXIT_FAILURE);
