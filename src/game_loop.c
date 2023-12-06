@@ -50,48 +50,58 @@ static void	calc_side_distance(t_game *game, t_point ray_dir)
 	}
 }
 
-static void	dda(t_params *data, int x)
+static void	dda_helper(t_game game, int x, t_params *data, int side)
 {
-	int	hit = 0;
-	t_game	game;
-	double		perp_wall_dist;
-	int		side = 0;
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		y;
 
-	game = data->game;
-
-	while (hit == 0)
-	{
-		if (game.s_dist.x < game.s_dist.y)
-		{
-			// printf("s_dist.x: %f, game.step.x: %f\n", game.s_dist.x, game.step.x);
-			game.s_dist.x += game.d_dist.x;
-			game.map.x += game.step.x;
-			side = 0;
-		}
-		else
-		{
-			// printf("s_dist.y: %f, game.step.y: %f\n", game.s_dist.y, game.step.y);
-			game.s_dist.y += game.d_dist.y;
-			game.map.y += game.step.y;
-			side = 1;
-		}
-		// printf("map x: %f, map y: %f\n", game.map.x, game.map.y);
-		// printf("%c\n", data->map[(int)game.map.x][(int)game.map.y]);
-		if (data->map[(int)game.map.x][(int)game.map.y] == '1')
-			break;
-	}
 	if (side == 0)
 		perp_wall_dist = (game.s_dist.x - game.d_dist.x);
 	else
 		perp_wall_dist = (game.s_dist.y - game.d_dist.y);
-	// printf("perp_wall_dist: %f\n", perp_wall_dist);
-	int line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-	int draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
-	if(draw_start < 0) draw_start = 0;
-	int draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
-	if(draw_end >= WINDOW_HEIGHT) draw_end = WINDOW_HEIGHT - 1;
-	my_mlx_pixel_put(data->image, x, draw_start, data->config->f_color);
-	my_mlx_pixel_put(data->image, x, draw_end, data->config->f_color);
+	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
+	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
+	if (draw_end >= WINDOW_HEIGHT)
+		draw_end = WINDOW_HEIGHT - 1;
+	y = 0;
+	while (y++ < draw_start)
+		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
+	y = draw_end;
+	while (y++ < WINDOW_HEIGHT)
+		my_mlx_pixel_put(data->image, x, y, data->config->f_color);
+}
+
+static void	dda(t_params *data, int x)
+{
+	t_game	game;
+
+	game = data->game;
+	game.side = 0;
+	game.hit = 0;
+	while (game.hit == 0)
+	{
+		if (game.s_dist.x < game.s_dist.y)
+		{
+			game.s_dist.x += game.d_dist.x;
+			game.map.x += game.step.x;
+			game.side = 0;
+		}
+		else
+		{
+			game.s_dist.y += game.d_dist.y;
+			game.map.y += game.step.y;
+			game.side = 1;
+		}
+		if (data->map[(int)game.map.x][(int)game.map.y] == '1')
+			break ;
+	}
+	dda_helper(game, x, data, game.side);
 }
 
 static void	draw_frame(t_params *data)
@@ -102,7 +112,6 @@ static void	draw_frame(t_params *data)
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		printf("x: %d\n", x);
 		ray_dir = calc_ray(&(data->game), x);
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);

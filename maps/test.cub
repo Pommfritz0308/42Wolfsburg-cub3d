@@ -2,13 +2,14 @@ NO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
 SO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
 EA /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
 WE /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-C	   150, 247, 1
-F 135, 0 ,221
+C 177, 184, 84
+F 114, 117, 75
 
 
 
 
 111111111111
-1E0000100001
-100100000111
+100000000001
+10000N000001
+100000000001
 111111111111

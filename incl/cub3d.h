@@ -38,6 +38,8 @@ typedef struct s_game
 	int			player_moved;
 	int			won;
 	int			lost;
+	int			side;
+	int			hit;
 }	t_game;
 
 typedef struct s_image
