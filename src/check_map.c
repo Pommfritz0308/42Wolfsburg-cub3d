@@ -58,7 +58,7 @@ t_point	find_spawnpoint(char **map)
 		while (map[i][j])
 		{
 			if (ft_strchr("NSEW", map[i][j]))
-				return ((t_point){i, j});
+				return ((t_point){i + 0.5, j + 0.5});
 			j++;
 		}
 		i++;
