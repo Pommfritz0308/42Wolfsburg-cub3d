@@ -116,6 +116,8 @@ static void	draw_frame(t_params *data)
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);
 		dda(data, x);
+		if (data->game.is_rotating)
+			turn_view(&data->game);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
@@ -145,18 +147,11 @@ int	game_loop(t_params *data)
 		clean_exit(data, EXIT_SUCCESS);
 	if (data->game.lost)
 		clean_exit(data, EXIT_FAILURE);
-	if (data->game.player_moved)
+	if (data->game.player_moved || data->game.is_rotating)
 	{
 		// data->game.player_moved = 0;
 		clear_image(data);
 		draw_frame(data);
-		double rotSpeed = 0.05;
-		double oldDirX = data->game.dir.x;
-		data->game.dir.x = data->game.dir.x * cos(-rotSpeed) - data->game.dir.y * sin(-rotSpeed);
-		data->game.dir.y = oldDirX * sin(-rotSpeed) + data->game.dir.y * cos(-rotSpeed);
-		double oldPlaneX = data->game.plane.x;
-		data->game.plane.x = data->game.plane.x * cos(-rotSpeed) - data->game.plane.y * sin(-rotSpeed);
-		data->game.plane.y = oldPlaneX * sin(-rotSpeed) + data->game.plane.y * cos(-rotSpeed);
 	}
 	return (0);
 }

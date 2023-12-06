@@ -40,6 +40,9 @@ typedef struct s_game
 	int			lost;
 	int			side;
 	int			hit;
+	int			cur_keycode;
+	bool		is_rotating;
+	double		rot_speed;
 }	t_game;
 
 typedef struct s_image
@@ -82,7 +85,6 @@ int					check_map(t_params *params);
 void				identifier_value(t_params *data,
 						char *identifier, char *l, int i);
 unsigned int		rgb_to_hex(int r, int g, int b);
-int					handle_key_press(int keycode, t_params *data);
 int					close_window(t_params *data);
 int					identifier_value_pos(char *str, char *search);
 int					check_found(t_params *data);
@@ -105,4 +107,6 @@ char				*skip_nline(t_params *data);
 void				check_nline(t_params *data, char *l, char *str);
 char				**copy_and_equalize(t_params *data, char **a, int c);
 void				put_color_msg(char *color, char *str);
+int					turn_view(t_game *game);
+int					handle_key_event(int keycode, t_params *data);
 #endif
