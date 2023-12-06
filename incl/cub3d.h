@@ -34,6 +34,7 @@ typedef struct s_game
 	t_point		d_dist;
 	t_point		step;
 	t_point		s_dist;
+	char		direction;
 	int			player_moved;
 	int			won;
 	int			lost;

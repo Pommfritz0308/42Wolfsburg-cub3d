@@ -98,9 +98,6 @@ static void	restore_map(char **map)
 
 int	check_map(t_params *params)
 {
-	t_point	spawnpoint;
-
-	print_tab(params->map);
 	if (!valid_characters(params->map))
 	{
 		printf("Error\nCub3D: invalid characters in map\n");
@@ -111,8 +108,10 @@ int	check_map(t_params *params)
 		printf("Error\nCub3D: wrong amount of spawnpoints\n");
 		return (0);
 	}
-	spawnpoint = find_spawnpoint(params->map);
-	if (!is_enclosed(params->map, spawnpoint.x, spawnpoint.y))
+	params->game.pos = find_spawnpoint(params->map);
+	params->game.direction
+		= params->map[(int)params->game.pos.x][(int)params->game.pos.y];
+	if (!is_enclosed(params->map, params->game.pos.x, params->game.pos.y))
 	{
 		printf("Error\nCub3D: map is not enclosed\n");
 		return (0);
