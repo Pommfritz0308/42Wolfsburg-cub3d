@@ -36,7 +36,7 @@ static void	calc_side_distance(t_game *game, t_point ray_dir)
 	else
 	{
 		game->step.x = 1;
-		game->s_dist.x = (game->pos.x - game->map.x + 1) * game->d_dist.x;
+		game->s_dist.x = (game->map.x + 1 - game->pos.x) * game->d_dist.x;
 	}
 	if (ray_dir.y < 0)
 	{
@@ -46,7 +46,7 @@ static void	calc_side_distance(t_game *game, t_point ray_dir)
 	else
 	{
 		game->step.y = 1;
-		game->s_dist.y = (game->pos.y - game->map.y + 1) * game->d_dist.y;
+		game->s_dist.y = (game->map.y + 1 - game->pos.y) * game->d_dist.y;
 	}
 }
 
@@ -62,6 +62,7 @@ static void	dda_helper(t_game game, int x, t_params *data, int side)
 		perp_wall_dist = (game.s_dist.x - game.d_dist.x);
 	else
 		perp_wall_dist = (game.s_dist.y - game.d_dist.y);
+	printf("perp wall dist: %f\n", perp_wall_dist);
 	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
 	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
 	if (draw_start < 0)
@@ -70,6 +71,7 @@ static void	dda_helper(t_game game, int x, t_params *data, int side)
 	if (draw_end >= WINDOW_HEIGHT)
 		draw_end = WINDOW_HEIGHT - 1;
 	y = 0;
+	// printf("line height: %i\n", line_height);
 	while (y++ < draw_start)
 		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
 	y = draw_end;
@@ -116,8 +118,6 @@ static void	draw_frame(t_params *data)
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);
 		dda(data, x);
-		if (data->game.is_rotating)
-			turn_view(&data->game);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
@@ -147,11 +147,7 @@ int	game_loop(t_params *data)
 		clean_exit(data, EXIT_SUCCESS);
 	if (data->game.lost)
 		clean_exit(data, EXIT_FAILURE);
-	if (data->game.player_moved || data->game.is_rotating)
-	{
-		// data->game.player_moved = 0;
-		clear_image(data);
-		draw_frame(data);
-	}
+	clear_image(data);
+	draw_frame(data);
 	return (0);
 }

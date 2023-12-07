@@ -49,9 +49,6 @@ void	*setup_variables(t_params *data)
 	printf("pos x: %f, pos y: %f\n", data->game.pos.x, data->game.pos.y);
 	data->game.plane.x = 0;
 	data->game.plane.y = 0.66;
-	data->game.player_moved = 1;
-	data->game.rot_speed = 0.05;
-	data->game.is_rotating = false;
 	data->game.dir = set_direction_vector(data->game.direction);
 	printf("mlx ptr: %p\n", data->mlx);
 	data->image.ptr = mlx_new_image(

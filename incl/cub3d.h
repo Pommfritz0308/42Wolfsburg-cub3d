@@ -9,12 +9,15 @@
 # include <stdbool.h>
 # include <math.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 
 # define NOT_SPECIFIED "not specified"
 # define INVALID_CONFIG "invalid configuration"
 # define NO_FILE_DIR "no such file or directory"
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
+# define ROT_SPEED 0.125
+# define MOVE_SPEED 0.125
 
 struct	s_config;
 
@@ -35,14 +38,10 @@ typedef struct s_game
 	t_point		step;
 	t_point		s_dist;
 	char		direction;
-	int			player_moved;
 	int			won;
 	int			lost;
 	int			side;
 	int			hit;
-	int			cur_keycode;
-	bool		is_rotating;
-	double		rot_speed;
 }	t_game;
 
 typedef struct s_image
@@ -107,6 +106,9 @@ char				*skip_nline(t_params *data);
 void				check_nline(t_params *data, char *l, char *str);
 char				**copy_and_equalize(t_params *data, char **a, int c);
 void				put_color_msg(char *color, char *str);
-int					turn_view(t_game *game);
+int					turn_view(t_game *game, int keycode);
 int					handle_key_event(int keycode, t_params *data);
+void				init_events(t_params *data);
+int					move_hor(t_params *data, int keycode);
+int					move_ver(t_params *data, int keycode);
 #endif
