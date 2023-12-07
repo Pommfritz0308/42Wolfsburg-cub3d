@@ -62,3 +62,22 @@ void	*setup_variables(t_params *data)
 			&data->image.endian);
 	return (NULL);
 }
+
+void	load_textures(t_params *data)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->textures[i].ptr = mlx_xpm_file_to_image(data->mlx,
+				data->config->xpm[i], &data->textures[i].width,
+				&data->textures[i].height);
+		if (!data->textures[i].ptr)
+			clean_exit(data, EXIT_FAILURE);
+		data->textures[i].buffer = mlx_get_data_addr(data->textures[i].ptr,
+				&data->textures[i].pixel_bits, &data->textures[i].line_bytes,
+				&data->textures[i].endian);
+		i++;
+	}
+}

@@ -37,11 +37,16 @@ typedef struct s_game
 	t_point		d_dist;
 	t_point		step;
 	t_point		s_dist;
+	t_point		tex;
 	char		direction;
+	double		wall_x;
 	int			won;
 	int			lost;
 	int			side;
 	int			hit;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }	t_game;
 
 typedef struct s_image
@@ -51,6 +56,8 @@ typedef struct s_image
 	int				pixel_bits;
 	int				line_bytes;
 	int				endian;
+	int				width;
+	int				height;
 }	t_image;
 
 typedef struct s_params
@@ -62,6 +69,7 @@ typedef struct s_params
 	int				count;
 	char			**map;
 	t_image			image;
+	t_image			textures[4];
 	t_game			game;
 	struct s_config	*config;
 }	t_params;
@@ -111,4 +119,8 @@ int					handle_key_event(int keycode, t_params *data);
 void				init_events(t_params *data);
 int					move_hor(t_params *data, int keycode);
 int					move_ver(t_params *data, int keycode);
+unsigned int		my_mlx_get_pixel_color(t_image image, int x, int y);
+void				find_hit(t_params *data,
+						double perp_wall_dist, int x, t_point ray_dir);
+void				fill_texture_buffer(t_params *data, int x);
 #endif

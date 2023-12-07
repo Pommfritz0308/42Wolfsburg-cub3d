@@ -50,36 +50,34 @@ static void	calc_side_distance(t_game *game, t_point ray_dir)
 	}
 }
 
-static void	dda_helper(t_game game, int x, t_params *data, int side)
+static void	dda_helper(t_params *data, int x, t_point ray_dir)
 {
 	double	perp_wall_dist;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	t_game	*g;
 	int		y;
 
-	if (side == 0)
-		perp_wall_dist = (game.s_dist.x - game.d_dist.x);
+	g = &data->game;
+	if (g->side == 0)
+		perp_wall_dist = (g->s_dist.x - g->d_dist.x);
 	else
-		perp_wall_dist = (game.s_dist.y - game.d_dist.y);
-	printf("perp wall dist: %f\n", perp_wall_dist);
-	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
-	if (draw_end >= WINDOW_HEIGHT)
-		draw_end = WINDOW_HEIGHT - 1;
+		perp_wall_dist = (g->s_dist.y - g->d_dist.y);
+	g->line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
+	g->draw_start = -g->line_height / 2 + WINDOW_HEIGHT / 2;
+	if (g->draw_start < 0)
+		g->draw_start = 0;
+	g->draw_end = g->line_height / 2 + WINDOW_HEIGHT / 2;
+	if (g->draw_end >= WINDOW_HEIGHT)
+		g->draw_end = WINDOW_HEIGHT - 1;
 	y = 0;
-	// printf("line height: %i\n", line_height);
-	while (y++ < draw_start)
+	while (y++ < g->draw_start)
 		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
-	y = draw_end;
+	y = g->draw_end;
 	while (y++ < WINDOW_HEIGHT)
 		my_mlx_pixel_put(data->image, x, y, data->config->f_color);
+	find_hit(data, perp_wall_dist, x, ray_dir);
 }
 
-static void	dda(t_params *data, int x)
+static void	dda(t_params *data, int x, t_point ray_dir)
 {
 	t_game	game;
 
@@ -103,7 +101,7 @@ static void	dda(t_params *data, int x)
 		if (data->map[(int)game.map.x][(int)game.map.y] == '1')
 			break ;
 	}
-	dda_helper(game, x, data, game.side);
+	dda_helper(data, x, ray_dir);
 }
 
 static void	draw_frame(t_params *data)
@@ -117,7 +115,7 @@ static void	draw_frame(t_params *data)
 		ray_dir = calc_ray(&(data->game), x);
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);
-		dda(data, x);
+		dda(data, x, ray_dir);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
