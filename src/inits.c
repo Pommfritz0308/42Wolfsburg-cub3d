@@ -70,6 +70,7 @@ void	load_textures(t_params *data)
 	i = 0;
 	while (i < 4)
 	{
+		data->textures[i].ptr = NULL;
 		data->textures[i].ptr = mlx_xpm_file_to_image(data->mlx,
 				data->config->xpm[i], &data->textures[i].width,
 				&data->textures[i].height);

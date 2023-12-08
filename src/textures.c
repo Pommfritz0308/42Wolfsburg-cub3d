@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	find_hit(t_params *data, double perp_wall_dist, int x, t_point ray_dir)
+void	find_hit(t_params *data, double perp_wall_dist, t_point ray_dir)
 {
 	t_game	*g;
 
@@ -8,11 +8,9 @@ void	find_hit(t_params *data, double perp_wall_dist, int x, t_point ray_dir)
 	if (g->side == 0)
 		g->wall_x = g->pos.y + perp_wall_dist * ray_dir.y;
 	else
-	{
 		g->wall_x = g->pos.x + perp_wall_dist * ray_dir.x;
-		g->wall_x -= floor(g->wall_x);
-	}
-	fill_texture_buffer(data, x);
+	g->wall_x -= floor(g->wall_x);
+
 }
 
 void	fill_texture_buffer(t_params *data, int x)

@@ -121,6 +121,6 @@ int					move_hor(t_params *data, int keycode);
 int					move_ver(t_params *data, int keycode);
 unsigned int		my_mlx_get_pixel_color(t_image image, int x, int y);
 void				find_hit(t_params *data,
-						double perp_wall_dist, int x, t_point ray_dir);
+						double perp_wall_dist, t_point ray_dir);
 void				fill_texture_buffer(t_params *data, int x);
 #endif
