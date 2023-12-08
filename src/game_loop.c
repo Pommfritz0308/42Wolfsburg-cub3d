@@ -86,9 +86,7 @@ static void	dda(t_params *data, int x, t_point ray_dir)
 	t_game	game;
 
 	game = data->game;
-	game.side = 0;
-	game.hit = 0;
-	while (game.hit == 0)
+	while (1)
 	{
 		if (game.s_dist.x < game.s_dist.y)
 		{
@@ -102,6 +100,7 @@ static void	dda(t_params *data, int x, t_point ray_dir)
 			game.map.y += game.step.y;
 			game.side = 1;
 		}
+		// printf("map.x: %f, map.y: %f\n", game.map.x, game.map.y);
 		if (data->map[(int)game.map.x][(int)game.map.y] == '1')
 			break ;
 	}
