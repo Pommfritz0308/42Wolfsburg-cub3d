@@ -68,9 +68,6 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	g->draw_end = g->line_height / 2 + WINDOW_HEIGHT / 2;
 	if (g->draw_end >= WINDOW_HEIGHT)
 		g->draw_end = WINDOW_HEIGHT - 1;
-	printf("draw start: %i, draw end: %i\n", g->draw_start, g->draw_end);
-	printf("s_dist.x: %f, s_dist.y: %f\n", g->s_dist.x, g->s_dist.y);
-	printf("d_dist.x: %f, d_dist.y: %f\n", g->d_dist.x, g->d_dist.y);
 	find_hit(data, perp_wall_dist, ray_dir);
 	y = 0;
 	while (y++ < g->draw_start)
@@ -78,7 +75,7 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	y = g->draw_end;
 	while (y++ < WINDOW_HEIGHT)
 		my_mlx_pixel_put(data->image, x, y, data->config->f_color);
-	fill_texture_buffer(data, x);
+	fill_texture_buffer(data, x, ray_dir);
 }
 
 static void	dda(t_params *data, int x, t_point ray_dir)
@@ -100,7 +97,6 @@ static void	dda(t_params *data, int x, t_point ray_dir)
 			game->map.y += game->step.y;
 			game->side = 1;
 		}
-		// printf("map.x: %f, map.y: %f\n", game.map.x, game.map.y);
 		if (data->map[(int)game->map.x][(int)game->map.y] == '1')
 			break ;
 	}

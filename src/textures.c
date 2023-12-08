@@ -13,7 +13,7 @@ void	find_hit(t_params *data, double perp_wall_dist, t_point ray_dir)
 
 }
 
-void	fill_texture_buffer(t_params *data, int x)
+void	fill_texture_buffer(t_params *data, int x, t_point ray_dir)
 {
 	double		step;
 	double		tex_pos;
@@ -21,18 +21,21 @@ void	fill_texture_buffer(t_params *data, int x)
 	int			y;
 
 	data->game.tex.x = (int)(data->game.wall_x * (double)data->textures[0].width);
+	if (data->game.side == 0 && ray_dir.x > 0)
+		data->game.tex.x = (double)data->textures[0].width - data->game.tex.x - 1;
+	if (data->game.side == 1 && ray_dir.y < 0)
+		data->game.tex.x = (double)data->textures[0].width - data->game.tex.x - 1;
 	step = 1.0 * data->textures[0].height / data->game.line_height;
 	tex_pos = (data->game.draw_start - WINDOW_HEIGHT
 			/ 2 + data->game.line_height / 2) * step;
 	y = data->game.draw_start;
-	while (y < data->game.draw_end)
+	while (y++ < data->game.draw_end)
 	{
 		data->game.tex.y = (int)tex_pos & (data->textures[0].height - 1);
 		tex_pos += step;
 		color = my_mlx_get_pixel_color(data->textures[0],
 				data->game.tex.x, data->game.tex.y);
 		my_mlx_pixel_put(data->image, x, y, color);
-		y++;
 	}
 }
 
