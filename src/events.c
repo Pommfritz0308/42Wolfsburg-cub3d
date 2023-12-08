@@ -25,7 +25,7 @@ int	turn_view(t_game *g, int keycode)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	if (keycode == XK_Left)
+	if (keycode == XK_Right)
 	{
 		old_dir_x = g->dir.x;
 		g->dir.x = g->dir.x * cos(-ROT_SPEED) - g->dir.y * sin(-ROT_SPEED);
@@ -36,7 +36,7 @@ int	turn_view(t_game *g, int keycode)
 		g->plane.y = old_plane_x * sin(-ROT_SPEED)
 			+ g->plane.y * cos(-ROT_SPEED);
 	}
-	if (keycode == XK_Right)
+	if (keycode == XK_Left)
 	{
 		old_dir_x = g->dir.x;
 		g->dir.x = g->dir.x * cos(ROT_SPEED) - g->dir.y * sin(ROT_SPEED);
@@ -53,8 +53,6 @@ int	move_ver(t_params *data, int keycode)
 	t_game	*g;
 
 	g = &data->game;
-	printf("Next pos: %i, %i\n", (int)(g->pos.x + g->dir.x * MOVE_SPEED), (int)(g->pos.y));
-	printf("position %f, %f\n", g->pos.x, g->pos.y);
 	if (keycode == XK_w)
 	{
 		if (data->map[(int)(g->pos.x + g->dir.x
@@ -81,7 +79,7 @@ int	move_hor(t_params *data, int keycode)
 	t_game	*g;
 
 	g = &data->game;
-	if (keycode == XK_d)
+	if (keycode == XK_a)
 	{
 		if (data->map[(int)(g->pos.x - g->dir.y
 				* MOVE_SPEED)][(int)(g->pos.y)] == '0')
@@ -90,7 +88,7 @@ int	move_hor(t_params *data, int keycode)
 			[(int)(g->pos.y + g->dir.x * MOVE_SPEED)] == '0')
 			g->pos.y += g->dir.x * MOVE_SPEED;
 	}
-	else if (keycode == XK_a)
+	else if (keycode == XK_d)
 	{
 		if (data->map[(int)(g->pos.x + g->dir.y
 				* MOVE_SPEED)][(int)(g->pos.y)] == '0')

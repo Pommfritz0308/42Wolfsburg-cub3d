@@ -83,25 +83,25 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 
 static void	dda(t_params *data, int x, t_point ray_dir)
 {
-	t_game	game;
+	t_game	*game;
 
-	game = data->game;
+	game = &data->game;
 	while (1)
 	{
-		if (game.s_dist.x < game.s_dist.y)
+		if (game->s_dist.x < game->s_dist.y)
 		{
-			game.s_dist.x += game.d_dist.x;
-			game.map.x += game.step.x;
-			game.side = 0;
+			game->s_dist.x += game->d_dist.x;
+			game->map.x += game->step.x;
+			game->side = 0;
 		}
 		else
 		{
-			game.s_dist.y += game.d_dist.y;
-			game.map.y += game.step.y;
-			game.side = 1;
+			game->s_dist.y += game->d_dist.y;
+			game->map.y += game->step.y;
+			game->side = 1;
 		}
 		// printf("map.x: %f, map.y: %f\n", game.map.x, game.map.y);
-		if (data->map[(int)game.map.x][(int)game.map.y] == '1')
+		if (data->map[(int)game->map.x][(int)game->map.y] == '1')
 			break ;
 	}
 	dda_helper(data, x, ray_dir);
