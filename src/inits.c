@@ -83,6 +83,10 @@ void	*setup_variables(t_params *data)
 			&data->image.pixel_bits,
 			&data->image.line_bytes,
 			&data->image.endian);
+	data->game.box_size.x = WINDOW_WIDTH
+		* MINIMAP_SCALE / ft_strlen(data->map[0]);
+	data->game.box_size.y = WINDOW_HEIGHT
+		* MINIMAP_SCALE / ft_tablen(data->map);
 	return (NULL);
 }
 

@@ -28,8 +28,6 @@ void	draw_minimap(t_params *data)
 	t_game	*g;
 
 	g = &data->game;
-	g->box_size.x = WINDOW_WIDTH * MINIMAP_SCALE / ft_strlen(data->map[0]);
-	g->box_size.y = WINDOW_HEIGHT * MINIMAP_SCALE / ft_tablen(data->map);
 	y = 0;
 	while (data->map[y])
 	{
