@@ -115,6 +115,7 @@ static void	draw_frame(t_params *data)
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);
 		dda(data, x, ray_dir);
+		draw_minimap(data);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);

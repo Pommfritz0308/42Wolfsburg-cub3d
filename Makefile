@@ -34,6 +34,7 @@ SRC	=	check_map.c \
 		utils2.c \
  		parser_config2.c \
 		parser_map.c \
+		minimap.c \
 		textures.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))

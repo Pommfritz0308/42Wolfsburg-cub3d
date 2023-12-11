@@ -16,6 +16,7 @@
 # define NO_FILE_DIR "no such file or directory"
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
+# define MINIMAP_SCALE 0.125
 # define ROT_SPEED 0.125
 # define MOVE_SPEED 0.125
 
@@ -38,6 +39,7 @@ typedef struct s_game
 	t_point		step;
 	t_point		s_dist;
 	t_point		tex;
+	t_point		box_size;
 	char		direction;
 	double		wall_x;
 	int			won;
@@ -123,4 +125,5 @@ unsigned int		my_mlx_get_pixel_color(t_image image, int x, int y);
 void				find_hit(t_params *data,
 						double perp_wall_dist, t_point ray_dir);
 void				fill_texture_buffer(t_params *data, int x, t_point ray_dir);
+void				draw_minimap(t_params *data);
 #endif
