@@ -6,7 +6,7 @@
 /*   By: fbohling <fbohling@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:05:54 by fbohling          #+#    #+#             */
-/*   Updated: 2023/11/28 10:36:15 by fbohling         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:56:31 by fbohling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ char	**ft_split_with_quotations(char const *s, char c);
 int		ft_count_char(char *s, char c);
 void	check_for_quotes(t_split *split, char *temp);
 int		ft_check_file_format(char *format, char *str);
+int		ft_tablen(char	**arr);
 
 #endif

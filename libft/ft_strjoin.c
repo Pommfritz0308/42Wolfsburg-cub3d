@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbohling <fbohling@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fbohling <fbohling@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:33:27 by fbohling          #+#    #+#             */
-/*   Updated: 2023/01/06 12:17:23 by fbohling         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:32:00 by fbohling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

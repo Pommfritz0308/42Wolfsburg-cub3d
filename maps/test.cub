@@ -1,14 +1,18 @@
-asfda
-       SO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
+NO textures/backrooms.xpm
+SO textures/backrooms.xpm
+EA textures/backrooms.xpm
+WE textures/backrooms.xpm
+C 114, 117, 75
+F 114, 117, 75
 
 
 
-C 255, 247, 1
 
-SOadgadsf
-       NO /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-sdfg
-EA /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-F 135, 0, 221
-WE /Users/fbohling/Desktop/cub3d/textures/bricksx64.xpm
-hey
+111111111111111111
+100000000000000001
+100001000100010001
+100100010001000101
+100001000N00010001
+100100010001000101
+100000000000000001
+111111111111111111

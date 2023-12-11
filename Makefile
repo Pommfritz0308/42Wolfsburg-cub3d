@@ -1,7 +1,7 @@
 NAME	= cub3D
 
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g
+CFLAGS	= -Werror -Wextra -Wall -g #-fsanitize=address
 INC			=	-I ./libft/\
 				-I ./mlx/\
 				-I/usr/X11/include \
@@ -21,14 +21,20 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 
 SRC_PATH	= src/
-SRC	=	main.c \
+SRC	=	check_map.c \
+		game_loop.c \
+		check_colors.c \
+		clean_exit.c \
+		main.c \
  		inits.c \
  		window_graphics.c \
  		events.c \
  		parser_config.c \
  		utils.c \
+		utils2.c \
  		parser_config2.c \
-		parser_map.c \ 
+		parser_map.c \
+		textures.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -44,10 +50,10 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 $(OBJS): $(OBJ_PATH)
 
 $(OBJ_PATH):
-	@mkdir $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
-	@make -sC $(MLX_PATH)
+	@make -sC $(MLX_PATH) >/dev/null 2>&1
 	@echo "$(COLOUR_GREEN)mlx ready$(END_COLOUR)"
 
 $(LIBFT):
