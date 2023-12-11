@@ -4,6 +4,7 @@ void	init_events(t_params *data)
 {
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_event, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
+	mlx_mouse_hook(data->win, handle_mouse_event, data);
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
 
@@ -17,6 +18,19 @@ int	handle_key_event(int keycode, t_params *data)
 		move_hor(data, keycode);
 	else if (keycode == XK_w || keycode == XK_s)
 		move_ver(data, keycode);
+	return (0);
+}
+
+
+int	handle_mouse_event(int button, int x, int y, t_params *data)
+{
+	(void)x;
+	(void)y;
+	printf("button: %d\n", button);
+	if (button == 1)
+		turn_view(&data->game, XK_Left);
+	else if (button == 3)
+		turn_view(&data->game, XK_Right);
 	return (0);
 }
 

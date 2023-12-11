@@ -84,6 +84,7 @@ typedef struct s_config
 	char			**xpm;
 }	t_config;
 
+int					handle_mouse_event(int button, int x, int y, t_params *data);
 void				my_mlx_pixel_put(t_image image, int x, int y, int color);
 void				*setup_variables(t_params *data);
 t_point				find_spawnpoint(char **map);
