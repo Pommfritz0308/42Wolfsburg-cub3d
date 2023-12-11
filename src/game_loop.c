@@ -8,7 +8,7 @@ static t_point	calc_ray(t_game *game, int x)
 	ray_dir.x = game->dir.x
 		+ game->plane.x * game->cam.x;
 	ray_dir.y = game->dir.y
-		+ game->plane.y * game->cam.y;
+		+ game->plane.y * game->cam.x;
 	return (ray_dir);
 }
 
