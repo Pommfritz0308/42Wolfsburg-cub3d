@@ -18,6 +18,7 @@
 # define WINDOW_HEIGHT 1080
 # define ROT_SPEED 0.125
 # define MOVE_SPEED 0.125
+# define CROSSHAIR_COLOR 0x00FF00
 
 struct	s_config;
 
