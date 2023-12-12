@@ -17,6 +17,7 @@ int	handle_key_event(int keycode, t_params *data)
 		move_hor(data, keycode);
 	else if (keycode == XK_w || keycode == XK_s)
 		move_ver(data, keycode);
+	data->game.player_moved = 1;
 	return (0);
 }
 

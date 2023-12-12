@@ -16,8 +16,11 @@
 # define NO_FILE_DIR "no such file or directory"
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-# define MINIMAP_SCALE 0.125
+# define MINIMAP_SCALE 6
 # define ROT_SPEED 0.125
+# define RADIUS 8
+# define CIRCLE_H 16
+# define CIRCLE_W 16
 # define MOVE_SPEED 0.125
 
 struct	s_config;
@@ -39,7 +42,7 @@ typedef struct s_game
 	t_point		step;
 	t_point		s_dist;
 	t_point		tex;
-	t_point		box_size;
+	int			box_size;
 	char		direction;
 	double		wall_x;
 	int			won;
@@ -49,6 +52,7 @@ typedef struct s_game
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
+	int			player_moved;
 }	t_game;
 
 typedef struct s_image
@@ -69,6 +73,9 @@ typedef struct s_params
 	int				map_fd;
 	int				line_n;
 	int				count;
+	int				yc;
+	int				xc;
+	int				radius;
 	char			**map;
 	t_image			image;
 	t_image			textures[4];

@@ -61,7 +61,10 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 		perp_wall_dist = (g->s_dist.x - g->d_dist.x);
 	else
 		perp_wall_dist = (g->s_dist.y - g->d_dist.y);
+	if (!perp_wall_dist)
+		perp_wall_dist = 0.1;
 	g->line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
+	printf("line_height: %d\n", g->line_height);
 	g->draw_start = -g->line_height / 2 + WINDOW_HEIGHT / 2;
 	if (g->draw_start < 0)
 		g->draw_start = 0;
@@ -73,6 +76,7 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	while (y++ < g->draw_start)
 		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
 	y = g->draw_end;
+	printf("draw_end: %d\n", g->draw_end);
 	while (y++ < WINDOW_HEIGHT)
 		my_mlx_pixel_put(data->image, x, y, data->config->f_color);
 	fill_texture_buffer(data, x, ray_dir);
@@ -115,9 +119,9 @@ static void	draw_frame(t_params *data)
 		calc_delta_distance(&(data->game), ray_dir);
 		calc_side_distance(&(data->game), ray_dir);
 		dda(data, x, ray_dir);
-		draw_minimap(data);
 		x++;
 	}
+	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
 }
 
@@ -126,16 +130,12 @@ void	clear_image(t_params *data)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < WINDOW_HEIGHT)
+	i = -1;
+	while (i++ < WINDOW_HEIGHT)
 	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
-		{
+		j = -1;
+		while (j++ < WINDOW_WIDTH)
 			my_mlx_pixel_put(data->image, j, i, 0xFF000000);
-			j++;
-		}
-		i++;
 	}
 }
 
@@ -145,7 +145,8 @@ int	game_loop(t_params *data)
 		clean_exit(data, EXIT_SUCCESS);
 	if (data->game.lost)
 		clean_exit(data, EXIT_FAILURE);
-	clear_image(data);
-	draw_frame(data);
+	if (data->game.player_moved)
+		draw_frame(data);
+	data->game.player_moved = 0;
 	return (0);
 }

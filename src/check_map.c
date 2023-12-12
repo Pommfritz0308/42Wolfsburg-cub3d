@@ -118,6 +118,5 @@ int	check_map(t_params *params)
 	}
 	put_color_msg("\x1b[32m", "Map √");
 	restore_map(params->map);
-	print_tab(params->map);
 	return (1);
 }
