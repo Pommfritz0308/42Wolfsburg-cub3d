@@ -85,6 +85,12 @@ typedef struct s_config
 	char			**xpm;
 }	t_config;
 
+// dda.c
+t_point	calc_ray(t_game *game, int x);
+void	calc_delta_distance(t_game *game, t_point ray_dir);
+void	calc_side_distance(t_game *game, t_point ray_dir);
+void	dda(t_params *data, int x, t_point ray_dir);
+
 int					handle_mouse_move(int x, int y, t_params *data);
 void				my_mlx_pixel_put(t_image image, int x, int y, int color);
 void				*setup_variables(t_params *data);

@@ -25,6 +25,7 @@ SRC	=	check_map.c \
 		game_loop.c \
 		check_colors.c \
 		clean_exit.c \
+		dda.c \
 		main.c \
  		inits.c \
  		window_graphics.c \
