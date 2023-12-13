@@ -17,8 +17,9 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 # define MINIMAP_SCALE 6
-# define ROT_SPEED 0.125
+# define ROT_SPEED 0.0115
 # define MOVE_SPEED 0.125
+# define CROSSHAIR_COLOR 0x00FF00
 
 struct	s_config;
 
@@ -90,6 +91,7 @@ typedef struct s_config
 	char			**xpm;
 }	t_config;
 
+int					handle_mouse_move(int x, int y, t_params *data);
 void				my_mlx_pixel_put(t_image image, int x, int y, int color);
 void				*setup_variables(t_params *data);
 t_point				find_spawnpoint(char **map);

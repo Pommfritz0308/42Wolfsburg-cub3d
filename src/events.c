@@ -4,6 +4,7 @@ void	init_events(t_params *data)
 {
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_event, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
+	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse_move, data);
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
 
@@ -18,6 +19,22 @@ int	handle_key_event(int keycode, t_params *data)
 	else if (keycode == XK_w || keycode == XK_s)
 		move_ver(data, keycode);
 	data->game.player_moved = 1;
+	return (0);
+}
+
+
+int	handle_mouse_move(int x, int y, t_params *data)
+{
+	int				x_direction;
+
+	(void)y;
+	(void)x;
+	x_direction = WINDOW_WIDTH / 2 - x;
+	if (x_direction > 0)
+		turn_view(&data->game, XK_Left);
+	else if (x_direction < 0)
+		turn_view(&data->game, XK_Right);
+	mlx_mouse_move(data->mlx, data->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);
 }
 

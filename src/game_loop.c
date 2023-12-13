@@ -105,6 +105,35 @@ static void	dda(t_params *data, int x, t_point ray_dir)
 	dda_helper(data, x, ray_dir);
 }
 
+static void draw_crosshair(t_params *data)
+{
+	int	x;
+	int	y;
+
+	x = WINDOW_WIDTH / 2 - 10;
+	while (x < WINDOW_WIDTH / 2 + 10)
+	{
+		y = WINDOW_HEIGHT / 2 - 1;
+		while (y < WINDOW_HEIGHT / 2 + 1)
+		{
+			my_mlx_pixel_put(data->image, x, y, CROSSHAIR_COLOR);
+			y++;
+		}
+		x++;
+	}
+	y = WINDOW_HEIGHT / 2 - 10;
+	while (y < WINDOW_HEIGHT / 2 + 10)
+	{
+		x = WINDOW_WIDTH / 2 - 1;
+		while (x < WINDOW_WIDTH / 2 + 1)
+		{
+			my_mlx_pixel_put(data->image, x, y, CROSSHAIR_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	draw_frame(t_params *data)
 {
 	int		x;
@@ -120,6 +149,7 @@ static void	draw_frame(t_params *data)
 		x++;
 	}
 	draw_minimap(data);
+	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
 }
 
