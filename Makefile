@@ -4,14 +4,14 @@ CC		= gcc
 CFLAGS	= -Werror -Wextra -Wall -g #-fsanitize=address
 INC			=	-I ./libft/\
 				-I ./mlx/\
-				-I/usr/X11/include \
+				-I /usr/X11/include \
 				-I ./incl
 
 LFLAGS = -L/usr/X11/lib -lX11 -lXext -lm
 
 
 MLX_PATH	= mlx/
-MLX_NAME	= libmlx.a
+MLX_NAME	= libmlx_Darwin.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
 
 LIBFT_PATH	= libft/
@@ -44,13 +44,13 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: $(MLX) $(LIBFT) $(NAME)
 
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
-
-$(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH) >/dev/null 2>&1
