@@ -18,9 +18,6 @@
 # define WINDOW_HEIGHT 1080
 # define MINIMAP_SCALE 6
 # define ROT_SPEED 0.125
-# define RADIUS 8
-# define CIRCLE_H 16
-# define CIRCLE_W 16
 # define MOVE_SPEED 0.125
 
 struct	s_config;

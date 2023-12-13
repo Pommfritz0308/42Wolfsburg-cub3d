@@ -64,7 +64,6 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	if (!perp_wall_dist)
 		perp_wall_dist = 0.1;
 	g->line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-	printf("line_height: %d\n", g->line_height);
 	g->draw_start = -g->line_height / 2 + WINDOW_HEIGHT / 2;
 	if (g->draw_start < 0)
 		g->draw_start = 0;
@@ -76,7 +75,6 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	while (y++ < g->draw_start)
 		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
 	y = g->draw_end;
-	printf("draw_end: %d\n", g->draw_end);
 	while (y++ < WINDOW_HEIGHT)
 		my_mlx_pixel_put(data->image, x, y, data->config->f_color);
 	fill_texture_buffer(data, x, ray_dir);
@@ -123,20 +121,6 @@ static void	draw_frame(t_params *data)
 	}
 	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
-}
-
-void	clear_image(t_params *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (i++ < WINDOW_HEIGHT)
-	{
-		j = -1;
-		while (j++ < WINDOW_WIDTH)
-			my_mlx_pixel_put(data->image, j, i, 0xFF000000);
-	}
 }
 
 int	game_loop(t_params *data)
