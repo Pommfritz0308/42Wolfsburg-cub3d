@@ -43,26 +43,9 @@ static void	draw_frame(t_params *data)
 		dda(data, x, ray_dir);
 		x++;
 	}
+	draw_minimap(data);
 	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.ptr, 0, 0);
-}
-
-void	clear_image(t_params *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WINDOW_HEIGHT)
-	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
-		{
-			my_mlx_pixel_put(data->image, j, i, 0xFF000000);
-			j++;
-		}
-		i++;
-	}
 }
 
 int	game_loop(t_params *data)
@@ -71,7 +54,8 @@ int	game_loop(t_params *data)
 		clean_exit(data, EXIT_SUCCESS);
 	if (data->game.lost)
 		clean_exit(data, EXIT_FAILURE);
-	clear_image(data);
-	draw_frame(data);
+	if (data->game.player_moved)
+		draw_frame(data);
+	data->game.player_moved = 0;
 	return (0);
 }

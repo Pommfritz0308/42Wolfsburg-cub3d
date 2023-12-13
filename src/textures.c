@@ -15,15 +15,13 @@ void	find_hit(t_params *data, double perp_wall_dist, t_point ray_dir)
 static int	get_tex_num(int side, t_point direction)
 {
 	if (side == 0 && direction.x > 0)
-	{
-        return 1;
-    } else if (side == 1 && direction.y < 0){
-        return 3;
-    } else if (side == 0 && direction.x < 0) {
-        return 0;
-    } else {
-        return 2;
-	}
+		return (1);
+	else if (side == 1 && direction.y < 0)
+		return (3);
+	else if (side == 0 && direction.x < 0)
+		return (0);
+	else
+		return (2);
 }
 
 void	fill_texture_buffer(t_params *data, int x, t_point ray_dir)

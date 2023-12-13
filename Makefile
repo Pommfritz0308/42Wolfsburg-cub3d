@@ -35,6 +35,7 @@ SRC	=	check_map.c \
 		utils2.c \
  		parser_config2.c \
 		parser_map.c \
+		minimap.c \
 		textures.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
@@ -45,13 +46,13 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: $(MLX) $(LIBFT) $(NAME)
 
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
-
-$(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH) >/dev/null 2>&1

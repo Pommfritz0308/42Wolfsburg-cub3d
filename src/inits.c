@@ -52,7 +52,6 @@ void	load_textures(t_params *data)
 	while (i < 4)
 	{
 		data->textures[i].ptr = NULL;
-		// printf("xpm: %s\n", data->config->xpm[i]);
 		data->textures[i].ptr = mlx_xpm_file_to_image(data->mlx,
 				data->config->xpm[i], &data->textures[i].width,
 				&data->textures[i].height);
@@ -61,19 +60,16 @@ void	load_textures(t_params *data)
 		data->textures[i].buffer = mlx_get_data_addr(data->textures[i].ptr,
 				&data->textures[i].pixel_bits, &data->textures[i].line_bytes,
 				&data->textures[i].endian);
-		// printf("buffer ptr: %p\n", data->textures[i].buffer);
 		i++;
 	}
 }
 
 void	*setup_variables(t_params *data)
 {
-	// printf("pos x: %f, pos y: %f\n", data->game.pos.x, data->game.pos.y);
 	data->game.plane.x = 0;
 	data->game.plane.y = 0.66;
 	load_textures(data);
 	data->game.dir = set_direction_vector(data->game.direction);
-	// printf("mlx ptr: %p\n", data->mlx);
 	data->image.ptr = mlx_new_image(
 			data->mlx,
 			WINDOW_WIDTH,
@@ -83,6 +79,10 @@ void	*setup_variables(t_params *data)
 			&data->image.pixel_bits,
 			&data->image.line_bytes,
 			&data->image.endian);
+	data->game.box_size = WINDOW_HEIGHT / ft_tablen(data->map) / 6;
+	data->game.player_moved = 1;
+	data->xc = data->game.box_size / 2;
+	data->yc = data->game.box_size / 2;
+	data->radius = data->game.box_size / 4;
 	return (NULL);
 }
-
