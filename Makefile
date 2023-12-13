@@ -45,13 +45,13 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: $(MLX) $(LIBFT) $(NAME)
 
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
-
-$(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH) >/dev/null 2>&1
