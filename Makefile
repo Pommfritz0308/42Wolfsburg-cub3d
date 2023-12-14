@@ -28,6 +28,7 @@ SRC =	check_colors.c \
 		game_loop.c \
  		inits.c \
 		main.c \
+    minimap.c \
  		parser_config.c \
  		parser_config2.c \
 		parser_map.c \

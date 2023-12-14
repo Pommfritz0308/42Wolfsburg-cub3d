@@ -11,6 +11,8 @@ void	my_mlx_pixel_put(t_image image, int x, int y, int color)
 {
 	char	*dst;
 
+	// if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+	// 	return ;
 	dst = image.buffer + (y * image.line_bytes + x
 			* (image.pixel_bits / 8));
 	*(unsigned int *)dst = color;
