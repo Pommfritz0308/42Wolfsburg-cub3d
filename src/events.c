@@ -35,6 +35,7 @@ int	handle_mouse_move(int x, int y, t_params *data)
 	else if (x_direction < 0)
 		turn_view(&data->game, XK_Right);
 	mlx_mouse_move(data->mlx, data->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	data->game.player_moved = 1;
 	return (0);
 }
 
