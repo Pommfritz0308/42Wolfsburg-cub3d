@@ -50,12 +50,13 @@ static void	draw_outline(t_params *data, int x, int y, int color)
 
 	g = &data->game;
 	i = 0;
-	while (i++ < g->box_size)
+	while (i <= g->box_size)
 	{
 		my_mlx_pixel_put(data->image, x * g->box_size
-			+ i, y * g->box_size, color);
-		my_mlx_pixel_put(data->image, x * g->box_size,
+			+ i, (y + 1) * g->box_size, color);
+		my_mlx_pixel_put(data->image, (x + 1) * g->box_size,
 			y * g->box_size + i, color);
+		i++;
 	}
 }
 

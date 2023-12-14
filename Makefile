@@ -29,10 +29,11 @@ SRC =	check_colors.c \
 		game_loop.c \
  		inits.c \
 		main.c \
-    minimap.c \
+    	minimap.c \
  		parser_config.c \
  		parser_config2.c \
 		parser_map.c \
+		stack.c \
  		utils.c \
 		utils2.c \
 		textures.c \
@@ -46,13 +47,9 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: $(MLX) $(LIBFT) $(NAME)
 
-$(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)
-
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-
-$(OBJS): $(OBJ_PATH)
 
 $(MLX):
 	@make -sC $(MLX_PATH) >/dev/null 2>&1

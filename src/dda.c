@@ -69,8 +69,8 @@ static void	dda_helper(t_params *data, int x, t_point ray_dir)
 	if (g->draw_end >= WINDOW_HEIGHT)
 		g->draw_end = WINDOW_HEIGHT - 1;
 	find_hit(data, perp_wall_dist, ray_dir);
-	y = 0;
-	while (y++ < g->draw_start)
+	y = -1;
+	while (++y < g->draw_start)
 		my_mlx_pixel_put(data->image, x, y, data->config->c_color);
 	y = g->draw_end;
 	while (y++ < WINDOW_HEIGHT)
