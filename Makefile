@@ -4,14 +4,14 @@ CC		= gcc
 CFLAGS	= -Werror -Wextra -Wall -g #-fsanitize=address
 INC			=	-I ./libft/\
 				-I ./mlx/\
-				-I/usr/X11/include \
+				-I /usr/X11/include \
 				-I ./incl
 
 LFLAGS = -L/usr/X11/lib -lX11 -lXext -lm
 
 
 MLX_PATH	= mlx/
-MLX_NAME	= libmlx.a
+MLX_NAME	= libmlx_Darwin.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
 
 LIBFT_PATH	= libft/
@@ -21,21 +21,21 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 
 SRC_PATH	= src/
-SRC	=	check_map.c \
-		game_loop.c \
-		check_colors.c \
+SRC =	check_colors.c \
+		check_map.c \
 		clean_exit.c \
-		main.c \
- 		inits.c \
- 		window_graphics.c \
  		events.c \
+		game_loop.c \
+ 		inits.c \
+		main.c \
+    minimap.c \
  		parser_config.c \
- 		utils.c \
-		utils2.c \
  		parser_config2.c \
 		parser_map.c \
-		minimap.c \
-		textures.c
+ 		utils.c \
+		utils2.c \
+		textures.c \
+ 		window_graphics.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
