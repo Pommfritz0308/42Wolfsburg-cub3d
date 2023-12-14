@@ -24,6 +24,7 @@ SRC_PATH	= src/
 SRC =	check_colors.c \
 		check_map.c \
 		clean_exit.c \
+		dda.c \
  		events.c \
 		game_loop.c \
  		inits.c \
