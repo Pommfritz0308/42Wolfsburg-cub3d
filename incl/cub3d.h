@@ -29,6 +29,23 @@ typedef struct s_point
 	double			y;
 }	t_point;
 
+typedef struct s_pixel
+{
+	int				x;
+	int				y;
+}	t_pixel;
+
+typedef struct s_node
+{
+	t_pixel				data;
+	struct s_node		*next;
+}	t_node;
+
+typedef struct s_stack
+{
+	t_node	*top;
+}	t_stack;
+
 typedef struct s_game
 {
 	t_point		pos;
@@ -96,6 +113,14 @@ t_point	calc_ray(t_game *game, int x);
 void	calc_delta_distance(t_game *game, t_point ray_dir);
 void	calc_side_distance(t_game *game, t_point ray_dir);
 void	dda(t_params *data, int x, t_point ray_dir);
+
+// stack.c
+void	push(t_stack *stack, t_pixel data);
+t_pixel	pop(t_stack *stack);
+void	initialize(t_stack *stack);
+int		is_empty(t_stack *stack);
+void	destroy_stack(t_stack *stack);
+
 
 int					handle_mouse_move(int x, int y, t_params *data);
 void				my_mlx_pixel_put(t_image image, int x, int y, int color);

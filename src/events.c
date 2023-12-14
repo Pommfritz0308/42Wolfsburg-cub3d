@@ -2,6 +2,7 @@
 
 void	init_events(t_params *data)
 {
+	mlx_mouse_hide(data->mlx, data->win);
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_event, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse_move, data);

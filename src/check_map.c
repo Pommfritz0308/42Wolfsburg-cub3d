@@ -68,13 +68,31 @@ t_point	find_spawnpoint(char **map)
 
 static int	is_enclosed(char **map, int x, int y)
 {
-	if (x < 0 || y < 0 || map[x] == NULL || map[x][y] == 0)
-		return (0);
-	if (map[x][y] == -1 || map[x][y] == '1')
-		return (1);
-	map[x][y] = -1;
-	return (is_enclosed(map, x - 1, y) && is_enclosed(map, x, y - 1)
-		&& is_enclosed(map, x + 1, y) && is_enclosed(map, x, y + 1));
+	t_stack	stack;
+	t_pixel	current;
+
+	initialize(&stack);
+	push(&stack, (t_pixel){x, y});
+	while (1)
+	{
+		current = pop(&stack);
+		if (current.x == -42 && current.y == -42)
+			break ;
+		if (current.x < 0 || current.y < 0)
+			return (destroy_stack(&stack), 0);
+		if (map[current.x] == NULL || map[current.x][current.y] == '\0')
+			return (destroy_stack(&stack), 0);
+		if (ft_strchr("NSEW0", map[current.x][current.y]))
+		{
+			map[current.x][current.y] = -1;
+			push(&stack, (t_pixel){current.x - 1, current.y});
+			push(&stack, (t_pixel){current.x + 1, current.y});
+			push(&stack, (t_pixel){current.x, current.y - 1});
+			push(&stack, (t_pixel){current.x, current.y + 1});
+		}
+	}
+	destroy_stack(&stack);
+	return (1);
 }
 
 static void	restore_map(char **map)

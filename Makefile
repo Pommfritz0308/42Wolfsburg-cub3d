@@ -33,6 +33,7 @@ SRC =	check_colors.c \
  		parser_config.c \
  		parser_config2.c \
 		parser_map.c \
+		stack.c \
  		utils.c \
 		utils2.c \
 		textures.c \
